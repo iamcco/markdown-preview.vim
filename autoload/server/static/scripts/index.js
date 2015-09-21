@@ -114,12 +114,12 @@
             for(i = 0, len = code.length; i < len; i++) {
                 line = code[i];
                 if(line.indexOf(options.flagSign) !== -1) {
-                    code[i] = line.replace(options.flagSign, '') + ' "' + options.flagSign + '"';
+                    code[i] = line.replace(options.flagSign, '') + ' code' + options.flagSign + 'code';
                 }
             }
             code = code.join('\n');
             code =  hljs.highlightAuto(code).value;
-            return code.replace('"' + options.flagSign + '"', options.aPoint);
+            return code.replace('code' + options.flagSign + 'code', options.aPoint);
         },
         renderer: options.renderer
     });
