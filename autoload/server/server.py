@@ -30,7 +30,7 @@ NO_FOUND_HEADER = u'HTTP/1.1 406 Not Acceptable\r\n\r\n'
 NEW_LINE        = u'\r\n'
 BLANK_LINE      = u'\r\n\r\n'
 ENCODING        = u'utf-8'
-RECV_BUF        = 8192
+RECV_BUF        = 81920
 
 port            = 8686
 sockets         = {}
