@@ -5,4 +5,3 @@ Session.vim
 *~
 /doc/tags
 *.pyc
-/autoload/server/log/
