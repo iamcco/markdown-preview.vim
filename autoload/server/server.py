@@ -37,6 +37,8 @@ sockets         = {}
 socketList      = set();
 
 def wLog():
+    if not os.path.exists('./log'):
+        os.mkdir('./log')
     log = open(u'./log/log.txt', u'w')
     traceback.print_exc(file=log)
     log.flush()
