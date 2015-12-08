@@ -1,9 +1,10 @@
 (function(global) {
     var TOTOPHEIGHT = 100;
-    var mkdID, body, mkdContainer, options;
+    var mkdID, body, html, mkdContainer, options;
 
     mkdID = window.location.pathname.split('/').slice(2);
     body = document.body;
+    html = document.querySelector('html');
     mkdContainer = document.getElementById('js-markdown');
     options = (function() {
         var flagSign = '019600976811CE18D7D4F7699D774DFF',  //md5 of the yuuko.cn
@@ -152,6 +153,7 @@
             aPoint = document.getElementById(options.rFlagSign);
             if(aPoint) {
                 TweenLite.to(body, 0.4, {scrollTop: aPoint.offsetTop - TOTOPHEIGHT, ease:Power2.easeOut});
+                TweenLite.to(html, 0.4, {scrollTop: aPoint.offsetTop - TOTOPHEIGHT, ease:Power2.easeOut});
             }
         });
     }
