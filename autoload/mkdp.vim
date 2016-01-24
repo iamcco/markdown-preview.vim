@@ -35,6 +35,7 @@ let g:mkdp_port = 8686
 let g:mkdp_prefix = localtime()
 let g:mkdp_bufs = {}
 let s:path_to_server = expand('<sfile>:p:h') . "/server/server.py"
+let g:mkdp_cwd = ''
 
 "python/python3 import init
 exec s:py_cmd . 'import vim'
@@ -42,6 +43,7 @@ exec s:py_cmd . 'import sys'
 exec s:py_cmd . 'cwd = vim.eval("expand(\"<sfile>:p:h\")")'
 exec s:py_cmd . 'sys.path.insert(0,cwd)'
 exec s:py_cmd . 'from server import send'
+exec s:py_cmd . 'import base64'
 
 fun! mkdp#browserStart() abort "open browser and save the buffer number
     if !has_key(g:mkdp_bufs, bufnr('%'))
@@ -105,10 +107,19 @@ fun! s:serverClose() abort "function for close the server
 endfu
 
 fun! s:browserStart() abort "function for opening the browser
+    let g:mkdp_cwd = expand('%:p:h')
+
+    " py2/py3 different resolve for str
+    if g:mkdp_py_version == 2
+        exec s:py_cmd . 'vim.command("let g:mkdp_cwd = \"" + base64.b64encode(vim.eval("g:mkdp_cwd")) + "\"")'
+    elseif g:mkdp_py_version == 3
+        exec s:py_cmd . 'vim.command("let g:mkdp_cwd = \"" + base64.b64encode(vim.eval("g:mkdp_cwd").encode("utf-8")).decode("utf-8") + "\"")'
+    endif
+
     if s:mkdp_is_windows()
-        exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%')
+        exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd
     else
-        call system(g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . " &>/dev/null &")
+        call system(g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd) . " &>/dev/null &")
     endif
 endfun
 

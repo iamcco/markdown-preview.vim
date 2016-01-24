@@ -13,7 +13,6 @@ through a browser
 
 ![screenshot](./screenshot.gif)
 
-
 ### Installation
 
 Using with [Vundle][Vundle]:
@@ -59,6 +58,10 @@ MarkdownPreviewStop command before using MarkdownPreview command
     " leave from insert mode, default 0 is auto refresh markdown as you edit or
     " move the cursor
 ```
+
+### Changelog
+
+* 2016/01/24: support display the local picture in markdown
 
 --------------------------------------------------------------------------------
 
@@ -111,5 +114,9 @@ MarkdownPreviewStop command before using MarkdownPreview command
     " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
     " 更新预览
 ```
+
+### Changelog
+
+* 2016/01/24: 支持显示本地图片
 
 [Vundle]: https://github.com/VundleVim/Vundle.vim

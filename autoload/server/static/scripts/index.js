@@ -6,6 +6,26 @@
     body = document.body;
     html = document.querySelector('html');
     mkdContainer = document.getElementById('js-markdown');
+
+    function getAbsPath(base, path) {
+        var bases = Base64.decode(base.slice(1)).split('/')
+        var paths = path.split('/');
+        if(/^https?:?/i.test(paths[0])) {
+            return path;
+        } else if(!/(^\..*)|(^\.\..*)/i.test(paths[0])) {
+            return '/image?' + Base64.encode(path);
+        } else {
+            for(var i = 0, len = paths.length; i < len; i++) {
+                if(paths[i] === '..') {
+                    bases.pop();
+                } else if(paths[i] !== '.') {
+                    bases.push(paths[i]);
+                }
+            }
+        }
+        return '/image?' + Base64.encode(bases.join('/'));
+    }
+
     options = (function() {
         var flagSign = '019600976811CE18D7D4F7699D774DFF',  //md5 of the yuuko.cn
             rFlagSign = flagSign.split('').reverse().join(''),
@@ -81,6 +101,7 @@
                 text = text.replace(flagSign, '');
                 result = aPoint;
             }
+            href = getAbsPath(location.search, href);
             return result + rImage.call(renderer, href, title, text);
         };
 
