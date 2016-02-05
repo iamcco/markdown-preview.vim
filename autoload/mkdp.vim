@@ -1,11 +1,11 @@
 "===============================================================================
 "File: autoload/mkdp.vim
 "Description: markdown preview
-"Last Change: 2015-09-20
+"Last Change: 2016-02-05
 "Maintainer: iamcco <ooiss@qq.com>
 "Github: http://github.com/iamcco <年糕小豆汤>
 "Licence: Vim Licence
-"Version: 0.0.1
+"Version: 0.2.0
 "===============================================================================
 
 if !exists('g:mkdp_py_version')
@@ -119,7 +119,7 @@ fun! s:browserStart() abort "function for opening the browser
     if s:mkdp_is_windows()
         exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd
     else
-        call system(g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd) . " &>/dev/null &")
+        call system(g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . " &>/dev/null &")
     endif
 endfun
 
