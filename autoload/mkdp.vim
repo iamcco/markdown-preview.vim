@@ -119,7 +119,7 @@ fun! s:browserStart() abort "function for opening the browser
     if s:mkdp_is_windows()
         exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd
     else
-        call system(g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . " &>/dev/null &")
+        call system(g:mkdp_path_to_chrome . " \"http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . " &>/dev/null &\"")
     endif
 endfun
 
