@@ -59,6 +59,15 @@ MarkdownPreviewStop command before using MarkdownPreview command
     " move the cursor
 ```
 
+For **OS X** users you can set the `g:mkdp_path_to_chrome` as below (if you use chrome):
+
+```
+let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+" or
+let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+```
+see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detail
+
 ### Changelog
 
 * 2016/01/24: support display the local picture in markdown
@@ -114,6 +123,15 @@ MarkdownPreviewStop command before using MarkdownPreview command
     " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
     " 更新预览
 ```
+
+**苹果** 用户如果使用chrome可以参照以下设置 `g:mkdp_path_to_chrome`:
+
+```
+let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+" or
+let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+```
+详细可以查看 issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) 
 
 ### Changelog
 
