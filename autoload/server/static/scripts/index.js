@@ -68,8 +68,25 @@
         };
 
         renderer.listitem = function(text) {
-            text = text.replace(flagSign, aPoint);
-            return '<li>' + text + '</li>\n';
+            var checked = '<input type="checkbox" class="task-list-item" checked disabled>',
+                unChecked = '<input type="checkbox" class="task-list-item" disabled>',
+                reg = /^\[\s*[xX]\s*\]/,
+                unReg = /^\[\s*\]/;
+
+            text = text.replace(/<p>(.*?)<\/p>/, '$1');
+            text = text.replace(flagSign, '');
+
+            var aPointText = text.indexOf(flagSign) != -1 ? aPoint : '';
+
+            if(reg.test(text)) {
+                text = text.replace(reg, '');
+                return '<li class="task-list-item" checked>' + aPointText + checked + text + '</li>\n';
+            } else if(unReg.test(text)) {
+                text = text.replace(unReg, '');
+                return '<li class="task-list-item">' + aPointText + unChecked + text + '</li>\n';
+            } else {
+                return '<li>' + aPointText + text + '</li>\n';
+            }
         };
 
         renderer.paragraph = function(text) {
