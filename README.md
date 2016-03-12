@@ -70,6 +70,7 @@ see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detai
 
 ### Changelog
 
+* 2016/03/12: new Github like markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list
 * 2016/01/24: support display the local picture in markdown
 
 --------------------------------------------------------------------------------
@@ -135,6 +136,7 @@ let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Go
 
 ### Changelog
 
+* 2016/03/12: 使用新的 Github 样式 [markdown.css](https://github.com/iamcco/markdown.css)，并且支持显示 todo 任务列表
 * 2016/01/24: 支持显示本地图片
 
 [Vundle]: https://github.com/VundleVim/Vundle.vim
