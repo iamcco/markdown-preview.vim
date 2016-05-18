@@ -6,12 +6,12 @@ Use the markdown-preview.vim plugin you can preview markdown on real-time
 through a browser
 
 > this plugin need your vim support py2/py3 features  
-> test on windows/ubuntu14
+> test on windows/ubuntu14/Mac OS X
 
 
 ### screenshot
 
-![screenshot](./screenshot.gif)
+![screenshot](https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif)
 
 ### Installation
 
@@ -57,6 +57,26 @@ MarkdownPreviewStop command before using MarkdownPreview command
     " set to 1, the vim will just refresh markdown when save the buffer or
     " leave from insert mode, default 0 is auto refresh markdown as you edit or
     " move the cursor
+
+    let g:mkdp_command_for_global = 0
+    " set to 1, the MarkdownPreview command can be use for all files,
+    " by default it just can be use in markdown file
+```
+
+**Key Mapping:**
+
+By default this Plugin has no mapping, if you want to has your own mapping
+you can map the keys to `<Plug>MarkdownPreview` for opening markdown preview window and
+map keys to `<Plug>StopMarkdownPreview` for closing the preview window
+
+Examples for mapping the `F8` key to open markdown preview window and `F9` key to
+close preview window:
+
+```
+nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
+imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
+imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 ```
 
 For **OS X** users you can set the `g:mkdp_path_to_chrome` as below (if you use chrome):
@@ -70,6 +90,7 @@ see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detai
 
 ### Changelog
 
+* 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
 * 2016/03/12: new Github like markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list
 * 2016/01/24: support display the local picture in markdown
 
@@ -123,6 +144,25 @@ see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detai
     let g:mkdp_refresh_slow = 0
     " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
     " 更新预览
+
+    let g:mkdp_command_for_global = 0
+    " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
+    " 文件可以使用改命令
+```
+
+**键位绑定：**
+
+默认情况下，插件没有进行任何的按键绑定，如果想绑定按键去预览 markdown 文件，可以绑定
+按键到`<Plug>MarkdownPreview`来打开预览窗口，绑定按键到`<Plug>StopMarkdownPreview`来
+关闭预览窗口。
+
+按键绑定例子（`F8`打开预览窗口，`F9`关闭预览窗口）：
+
+```
+nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式
+imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式
+imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式
 ```
 
 **苹果** 用户如果使用chrome可以参照以下设置 `g:mkdp_path_to_chrome`:
@@ -136,6 +176,7 @@ let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Go
 
 ### Changelog
 
+* 2016/05/18: 支持按键绑定，并增加新的 `g:mkdp_command_for_global` 配置项
 * 2016/03/12: 使用新的 Github 样式 [markdown.css](https://github.com/iamcco/markdown.css)，并且支持显示 todo 任务列表
 * 2016/01/24: 支持显示本地图片
 

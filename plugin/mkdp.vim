@@ -39,6 +39,10 @@ if !exists('g:mkdp_refresh_slow')
     let g:mkdp_refresh_slow = 0
 endif
 
+if !exists('g:mkdp_command_for_global')
+    let g:mkdp_command_for_global = 0
+endif
+
 let g:mkdp_server_started = 0
 
 fu! s:serverStart() abort
@@ -73,19 +77,35 @@ fun! s:serverClose() abort
     endfor
     let g:mkdp_server_started = 0
     let g:mkdp_bufs = {}
-    delcommand MarkdownPreviewStop
+    if exists(':MarkdownPreviewStop')
+        delcommand MarkdownPreviewStop
+    endif
 endfu
 
 if g:mkdp_auto_start
 
     "if auto start, launch the server when enter the mkd buffer
 
-    au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} call s:serverStart()
+    if g:mkdp_command_for_global
+        au BufEnter * call s:serverStart()
+    else
+        au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} call s:serverStart()
+    endif
 endif
 
 "define the command to start the server when enter the mkd buffer
 
-au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} command! -buffer MarkdownPreview call s:serverStart()
+if g:mkdp_command_for_global
+    au BufEnter * command! -buffer MarkdownPreview call s:serverStart()
+else
+    au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} command! -buffer MarkdownPreview call s:serverStart()
+endif
+
+" mapping for user
+map <silent> <Plug>MarkdownPreview :call <SID>serverStart()<CR>
+imap <silent> <Plug>MarkdownPreview <Esc>:call <SID>serverStart()<CR>a
+map <silent> <Plug>StopMarkdownPreview :if exists(':MarkdownPreviewStop') \| exec 'MarkdownPreviewStop ' \| endif<CR>
+imap <silent> <Plug>StopMarkdownPreview <Esc>:if exists(':MarkdownPreviewStop') \| exec 'MarkdownPreviewStop ' \| endif<CR>a
 
 "-------------------------------------------------------------------------------
 let &cpo = s:save_cpo
