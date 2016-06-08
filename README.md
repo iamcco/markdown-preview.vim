@@ -88,6 +88,18 @@ let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Go
 ```
 see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detail
 
+### FAQ
+
+Q: the firefox preview window didn't close when leave the markdown file in vim
+
+A: if you want the plugin auto close the preview window on firefox, you have to do some config:
+
+1. open firefox
+2. type `about:config` in the address bar and press Enter key
+3. search `dom.allow_scripts_to_close_windows` item and set the value to `true`
+
+> you have to know what will happend when you do the config above
+
 ### Changelog
 
 * 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
@@ -173,6 +185,18 @@ let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 ```
 详细可以查看 issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) 
+
+### FAQ
+
+Q: 在火狐浏览器中，预览页面不能自动关闭
+
+A: 如果需要在火狐浏览器中启用自动关闭预览窗口，需要相关设置：
+
+1. 打开火狐浏览器
+2. 地址栏敲入 `about:config` 然后回车
+3. 搜索 `dom.allow_scripts_to_close_windows` 选项，并设置 value 为 `true`
+
+> 如果你打算设置上面的配置，你应该知道该配置会产生什么影响
 
 ### Changelog
 
