@@ -12,7 +12,7 @@
         var paths = path.split('/');
         if(/^https?:?/i.test(paths[0])) {
             return path;
-        } else if(!/(^\..*)|(^\.\..*)/i.test(paths[0])) {
+        } else if(/^$/.test(paths[0])) {
             return '/image?' + Base64.encode(path);
         } else {
             for(var i = 0, len = paths.length; i < len; i++) {
