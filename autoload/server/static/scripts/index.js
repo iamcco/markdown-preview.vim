@@ -7,6 +7,16 @@
     html = document.querySelector('html');
     mkdContainer = document.getElementById('js-markdown');
 
+    function fixAllImg(text) {
+        var match, reg = /<img[^>]+?(src=("|')([^\2]+?)\2)[^>]+?>/g;
+        while((match = reg.exec(text)) !== null) {
+            if(match && match.length === 4) {
+                text = text.replace(match[3], getAbsPath(location.search, match[3]));
+            }
+        }
+        return text;
+    }
+
     function getAbsPath(base, path) {
         var bases = Base64.decode(base.slice(1)).split('/')
         var paths = path.split('/');
@@ -63,6 +73,7 @@
                 if(line.indexOf(flagSign) !== -1) {
                     html[i] = line.replace(flagSign, '') + aPoint;
                 }
+                html[i] = fixAllImg(html[i]);
             }
             return html.join('\n');
         };
@@ -90,7 +101,7 @@
         };
 
         renderer.paragraph = function(text) {
-            text = text.replace(flagSign, aPoint);
+            text = fixAllImg(text.replace(flagSign, aPoint));
             return '<p>' + text + '</p>\n';
         };
 
@@ -118,7 +129,6 @@
                 text = text.replace(flagSign, '');
                 result = aPoint;
             }
-            href = getAbsPath(location.search, href);
             return result + rImage.call(renderer, href, title, text);
         };
 
