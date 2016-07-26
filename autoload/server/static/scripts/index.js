@@ -57,7 +57,7 @@
                 + level
                 + ' id="'
                 + this.options.headerPrefix
-                + raw.toLowerCase().replace(/[^\w]+/g, '-')
+                + raw.toLowerCase().replace(/[\s]+/g, '-')
                 + '">'
                 + text
                 + '</h'
