@@ -96,7 +96,7 @@ endfu
 fun! s:serverStart() abort "function for starting the server
     let g:mkdp_port = g:mkdp_port + localtime()[7:10]
     if s:mkdp_is_windows()
-        exec "silent !start /b python " . s:path_to_server . ' ' . g:mkdp_port
+        exec "silent !start /b python " . '"' . s:path_to_server . '" ' . g:mkdp_port
     else
         call system("python " . s:path_to_server . " " . g:mkdp_port . " &>/dev/null &")
     endif
