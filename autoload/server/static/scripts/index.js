@@ -8,7 +8,8 @@
     mkdContainer = document.getElementById('js-markdown');
 
     function updateTitle() {
-        var fileName = Base64.decode(location.search.slice(1)).split('/').pop();
+        var slash = getSlash();
+        var fileName = Base64.decode(location.search.slice(1)).split(slash).pop();
         var title = document.getElementsByTagName('title')[0];
         title.innerHTML = fileName;
     }
@@ -23,12 +24,24 @@
         return text;
     }
 
+    function getSlash() {
+        var platform = navigator.platform;
+        var slash;
+        if(/^win.*/i.test(platform)) {
+            slash = '\\';
+        } else {
+            slash = '/';
+        }
+        return slash;
+    }
+
     function getAbsPath(base, path) {
-        var bases = Base64.decode(base.slice(1)).split('/').slice(0, -1);
-        var paths = path.split('/');
+        var slash = getSlash();
+        var bases = Base64.decode(base.slice(1)).split(slash).slice(0, -1);
+        var paths = path.split(slash);
         if(/^https?:?/i.test(paths[0])) {
             return path;
-        } else if(/^$/.test(paths[0])) {
+        } else if(/^|[a-zA-Z]:\\.*$/.test(paths[0])) {
             return '/image?' + Base64.encode(path);
         } else {
             for(var i = 0, len = paths.length; i < len; i++) {
@@ -39,7 +52,7 @@
                 }
             }
         }
-        return '/image?' + Base64.encode(bases.join('/'));
+        return '/image?' + Base64.encode(bases.join(slash));
     }
 
     options = (function() {
