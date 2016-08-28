@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/iamcco/markdown-preview.vim](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iamcco/markdown-preview.vim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Use the markdown-preview.vim plugin you can preview markdown on real-time
+Using the markdown-preview.vim plugin you can preview markdown on real-time
 through a browser
 
 > this plugin need your vim support py2/py3 features  
@@ -15,7 +15,7 @@ through a browser
 
 ### Installation
 
-Using with [Vundle][Vundle]:
+with [Vundle][Vundle]:
 
 put `Plugin 'iamcco/markdown-preview.vim'` to the `.vimrc/_vimrc` file and type
 `:PluginInstall`
@@ -102,6 +102,7 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
 
 ### Changelog
 
+* 2016/08/28: set the title of preview page with file name
 * 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
 * 2016/03/12: new Github like markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list
 * 2016/01/24: support display the local picture in markdown
@@ -200,6 +201,7 @@ A: 如果需要在火狐浏览器中启用自动关闭预览窗口，需要相�
 
 ### Changelog
 
+* 2016/05/18: 设置预览页面的标题为文件的名字
 * 2016/05/18: 支持按键绑定，并增加新的 `g:mkdp_command_for_global` 配置项
 * 2016/03/12: 使用新的 Github 样式 [markdown.css](https://github.com/iamcco/markdown.css)，并且支持显示 todo 任务列表
 * 2016/01/24: 支持显示本地图片
