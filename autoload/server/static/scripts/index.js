@@ -7,6 +7,12 @@
     html = document.querySelector('html');
     mkdContainer = document.getElementById('js-markdown');
 
+    function updateTitle() {
+        var fileName = Base64.decode(location.search.slice(1)).split('/').pop();
+        var title = document.getElementsByTagName('title')[0];
+        title.innerHTML = fileName;
+    }
+
     function fixAllImg(text) {
         var match, reg = /<img[^>]+?(src=("|')([^\2]+?)\2)[^>]+?>/g;
         while((match = reg.exec(text)) !== null) {
@@ -18,7 +24,7 @@
     }
 
     function getAbsPath(base, path) {
-        var bases = Base64.decode(base.slice(1)).split('/')
+        var bases = Base64.decode(base.slice(1)).split('/').slice(0, -1);
         var paths = path.split('/');
         if(/^https?:?/i.test(paths[0])) {
             return path;
@@ -208,9 +214,10 @@
     }
 
     function winClose() {
-        window.close()
+        window.close();
     }
 
+    updateTitle();
     openConn();
 
 })(this);

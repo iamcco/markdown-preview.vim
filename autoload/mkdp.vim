@@ -107,7 +107,7 @@ fun! s:serverClose() abort "function for close the server
 endfu
 
 fun! s:browserStart() abort "function for opening the browser
-    let g:mkdp_cwd = expand('%:p:h')
+    let g:mkdp_cwd = expand('%:p')
 
     " py2/py3 different resolve for str
     if g:mkdp_py_version == 2
