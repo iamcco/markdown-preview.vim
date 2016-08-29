@@ -98,6 +98,7 @@
         };
 
         renderer.listitem = function(text) {
+            text = fixAllImg(text);
             var checked = '<input type="checkbox" class="task-list-item" checked disabled>',
                 unChecked = '<input type="checkbox" class="task-list-item" disabled>',
                 reg = /^\[\s*[xX]\s*\]/,
