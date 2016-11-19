@@ -1,15 +1,16 @@
 (function(global) {
     var TOTOPHEIGHT = 100;
-    var mkdID, body, html, mkdContainer, options;
+    var mkdID, body, html, mkdContainer, options, isLoadMathJax;
 
-    mkdID = window.location.pathname.split('/').slice(2);
+    mkdID = window.location.pathname.split('/').slice(2);   // page 为一 ID，和编辑文件对应
     body = document.body;
     html = document.querySelector('html');
-    mkdContainer = document.getElementById('js-markdown');
+    mkdContainer = document.getElementById('js-markdown');  // markdown 渲染容器
 
+    // 更新预览页面的标题
     function updateTitle() {
         var slash = getSlash();
-        var fileName = Base64.decode(location.search.slice(1)).split(slash).pop();
+        var fileName = Base64.decode(location.search.slice(1)).split('&')[0].split(slash).pop();
         var title = document.getElementsByTagName('title')[0];
         title.innerHTML = fileName;
     }
@@ -37,12 +38,12 @@
 
     function getAbsPath(base, path) {
         var slash = getSlash();
-        var bases = Base64.decode(base.slice(1)).split(slash).slice(0, -1);
+        var bases = Base64.decode(base.slice(1)).split('&')[0].split(slash).slice(0, -1);
         var paths = path.split(slash);
         if(/^https?:?/i.test(paths[0])) {
             return path;
         } else if(/^$|^[a-zA-Z]:.*$/.test(paths[0])) {
-            return '/image?' + Base64.encode(path);
+            return '/DIYURL?' + Base64.encode(path);
         } else {
             for(var i = 0, len = paths.length; i < len; i++) {
                 if(paths[i] === '..') {
@@ -52,7 +53,22 @@
                 }
             }
         }
-        return '/image?' + Base64.encode(bases.join(slash));
+        return '/DIYURL?' + Base64.encode(bases.join(slash));
+    }
+
+    function loadMathJax() {
+        var h, s;
+        if (!isLoadMathJax) {
+            isLoadMathJax = true;
+            window.MATHJAX_PATH = Base64.decode(location.search.slice(1)).split('&')[1];
+            // 加载 mathjax
+            h = document.getElementsByTagName('head')[0];
+            s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '/DIYURL/MathJax.js?' + Base64.encode(window.MATHJAX_PATH + 'MathJax.js') + '&config=TeX-AMS-MML_HTMLorMML';
+            h.appendChild(s);
+        }
     }
 
     options = (function() {
@@ -61,8 +77,29 @@
             aPoint = '<a style="position: relative;" href="#'+ rFlagSign +'" id="'+ rFlagSign +'"></a>',
             renderer = new marked.Renderer(),
             rImage = renderer.image,
-            rLink = renderer.link;
+            rLink = renderer.link,
+            displaymath = renderer.displaymath,
+            inlineMath = renderer.math;
 
+        renderer.displaymath = function(text) {
+            loadMathJax();
+            var result = '';
+            text = text.replace('>', 'style="visibility: hidden;">')
+            if (text.indexOf(flagSign) !== -1) {
+                text = text.replace(flagSign, '');
+                result = aPoint;
+            }
+            return result + displaymath(text);
+        };
+        renderer.math = function(text) {
+            loadMathJax();
+            var result = '';
+            if (text.indexOf(flagSign) !== -1) {
+                text = text.replace(flagSign, '');
+                result = aPoint;
+            }
+            return result + inlineMath(text);
+        };
         //do solve for the position sign
         renderer.heading = function(text, level, raw) {
             var result = '';
@@ -224,6 +261,9 @@
                 TweenLite.to(body, 0.4, {scrollTop: aPoint.offsetTop - TOTOPHEIGHT, ease:Power2.easeOut});
                 TweenLite.to(html, 0.4, {scrollTop: aPoint.offsetTop - TOTOPHEIGHT, ease:Power2.easeOut});
             }
+
+            // 更新 MathJax 预览
+            window.MathJax && MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
         });
     }
 

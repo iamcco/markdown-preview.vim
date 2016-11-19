@@ -8,17 +8,28 @@ through a browser
 > this plugin need your vim support py2/py3 features  
 > test on windows/ubuntu14/Mac OS X
 
-
 ### screenshot
+
+**markdown preview**
 
 ![screenshot](https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif)
 
+**Typeset math**
+
+![screenshot](https://cloud.githubusercontent.com/assets/5492542/20455946/275dc74c-aea3-11e6-96f8-0d1a47e50f95.png)
+
 ### Installation
 
-with [Vundle][Vundle]:
+with [vim-plug][vim-plug]:
 
-put `Plugin 'iamcco/markdown-preview.vim'` to the `.vimrc/_vimrc` file and type
-`:PluginInstall`
+add `Plug 'iamcco/markdown-preview.vim'` to the `vimrc` or `init.vim` file and type `:PlugInstall`
+
+or with MathJax support for typesetting math:
+
+```
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+```
 
 ### Usage
 
@@ -102,6 +113,7 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
 
 ### Changelog
 
+* 2016/11/19: MathJax support with [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) plugin
 * 2016/08/28: set the title of preview page with file name
 * 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
 * 2016/03/12: new Github like markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list
@@ -117,10 +129,16 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
 
 ### 安装
 
-使用 [Vundle][Vundle]:
+使用 [vim-plug][vim-plug]:
 
-在 `.vimrc/_vimrc` 配置文件中添加 `Plugin 'iamcco/markdown-preview.vim'` 然后
-运行 `:PluginInstall` 命令
+在 `.vimrc` 或 `init.vim` 配置文件中添加 `Plug 'iamcco/markdown-preview.vim'` 然后运行 `:PlugInstall` 命令
+
+如果需要预览数学公式，还需要安装 `mathjax-support-for-mkdp` 插件：
+
+```
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+```
 
 ### 使用和设置
 
@@ -201,9 +219,10 @@ A: 如果需要在火狐浏览器中启用自动关闭预览窗口，需要相�
 
 ### Changelog
 
+* 2016/11/19: 通过辅助插件 [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) 支持数学公式显示
 * 2016/05/18: 设置预览页面的标题为文件的名字
 * 2016/05/18: 支持按键绑定，并增加新的 `g:mkdp_command_for_global` 配置项
 * 2016/03/12: 使用新的 Github 样式 [markdown.css](https://github.com/iamcco/markdown.css)，并且支持显示 todo 任务列表
 * 2016/01/24: 支持显示本地图片
 
-[Vundle]: https://github.com/VundleVim/Vundle.vim
+[vim-plug]: https://github.com/junegunn/vim-plug

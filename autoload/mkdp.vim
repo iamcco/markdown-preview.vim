@@ -107,7 +107,14 @@ fun! s:serverClose() abort "function for close the server
 endfu
 
 fun! s:browserStart() abort "function for opening the browser
-    let g:mkdp_cwd = expand('%:p')
+    let s:mathjax_vim_path = ''
+
+    " whether mathjax support
+    if exists('g:mathjax_vim_path')
+        let s:mathjax_vim_path = g:mathjax_vim_path
+    endif
+
+    let g:mkdp_cwd = expand('%:p') . '&' . s:mathjax_vim_path
 
     " py2/py3 different resolve for str
     if g:mkdp_py_version == 2

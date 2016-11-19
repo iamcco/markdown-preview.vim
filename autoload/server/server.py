@@ -20,7 +20,10 @@ MIME_TYPE       = {
     u'png' : u'image/png',
     u'gif' : u'image/gif',
     u'bmp' : u'image/bmp',
-    u'all' : u'text/plain'
+    u'all' : u'text/plain',
+    u'eot' : u'application/font-eot',
+    u'otf' : u'application/font-otf',
+    u'woff' : u'application/font-woff'
 }
 SOCKET_HEADER   = u'HTTP/1.1 101 Switching Protocols\r\n'\
                   u'Upgrade: websocket\r\n'\
@@ -148,13 +151,14 @@ class Util():
             else:
                 conn.send(OK_HEADER.encode(ENCODING))
                 conn.close()
-        elif paths[1].startswith(u'image'):
-            p = base64.b64decode(path.split(u'?')[1].encode(ENCODING)).decode(ENCODING)
+        elif paths[1].startswith(u'DIYURL'):
+            p = base64.b64decode(path.split(u'?')[1].split('&')[0].encode(ENCODING)).decode(ENCODING)
             if os.path.exists(p):
+                mimeType = u'';
                 ps = p.split(u'.')
                 if len(ps) >= 2:
                     mimeType = ps[len(ps)-1].lower()
-                else:
+                if mimeType not in MIME_TYPE:
                     mimeType = u'all'
                 f = open(p, u'rb')
                 s = f.read()
@@ -162,7 +166,7 @@ class Util():
                 conn.send((MD_HEADER % (len(s), MIME_TYPE[mimeType])).encode(ENCODING) + s)
                 conn.close()
             else:
-                conn.send(OK_HEADER.encode(ENCODING))
+                conn.send(NO_FOUND_HEADER.encode(ENCODING))
                 conn.close()
         else:
             conn.send(OK_HEADER.encode(ENCODING))
