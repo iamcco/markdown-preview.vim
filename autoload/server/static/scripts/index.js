@@ -2,12 +2,12 @@
     var TOTOPHEIGHT = 100;
     var mkdID, body, html, mkdContainer, options, isLoadMathJax;
 
-    mkdID = window.location.pathname.split('/').slice(2);   // page 为一 ID，和编辑文件对应
+    mkdID = window.location.pathname.split('/').slice(2);
     body = document.body;
     html = document.querySelector('html');
-    mkdContainer = document.getElementById('js-markdown');  // markdown 渲染容器
+    mkdContainer = document.getElementById('js-markdown');
 
-    // 更新预览页面的标题
+
     function updateTitle() {
         var slash = getSlash();
         var fileName = Base64.decode(location.search.slice(1)).split('&')[0].split(slash).pop();
@@ -61,7 +61,6 @@
         if (!isLoadMathJax) {
             isLoadMathJax = true;
             window.MATHJAX_PATH = Base64.decode(location.search.slice(1)).split('&')[1];
-            // 加载 mathjax
             h = document.getElementsByTagName('head')[0];
             s = document.createElement('script');
             s.type = 'text/javascript';
@@ -262,7 +261,6 @@
                 TweenLite.to(html, 0.4, {scrollTop: aPoint.offsetTop - TOTOPHEIGHT, ease:Power2.easeOut});
             }
 
-            // 更新 MathJax 预览
             window.MathJax && MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
         });
     }
