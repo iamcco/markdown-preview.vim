@@ -152,7 +152,6 @@
         if (theme != 'simple' && theme != 'hand') {
             theme = 'simple';
         }
-        console.log(content)
         var d = Diagram.parse(content);
         d.drawSVG(id, {
             theme: theme
@@ -366,11 +365,9 @@
                 });
                 // load sequenceDiagram
             $('.'+ options.sequenceFlagSign).each(function() {
-                    console.log(onlyId)
                     $(this).attr('id', ++onlyId + options.sequenceFlagSign);
                     var content = $(this).text();
                     $(this).text('');
-                    console.log(content);
                     loadSequenceDiagram(content, $(this).attr('id'), $(this).attr('theme'));
                     $(this).removeAttr('id');
                     $(this).removeAttr('class');
