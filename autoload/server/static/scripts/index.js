@@ -148,11 +148,13 @@
         });
     }
 
-    function loadSequenceDiagram(id, theme = 'simple') {
+    function loadSequenceDiagram(content, id, theme = 'simple') {
         if (theme != 'simple' && theme != 'hand') {
             theme = 'simple';
         }
-        $("#" + id).sequenceDiagram({
+        console.log(content)
+        var d = Diagram.parse(content);
+        d.drawSVG(id, {
             theme: theme
         });
     }
@@ -160,8 +162,8 @@
         var flagSign = '019600976811CE18D7D4F7699D774DFF', //md5 of the yuuko.cn
             rFlagSign = flagSign.split('').reverse().join(''),
             flowFlagSign = 'flow' + flagSign,
-            sequenceFlagSign = 'sequence' + flagSign;
-        aPoint = '<a style="position: relative;" href="#' + rFlagSign + '" id="' + rFlagSign + '"></a>',
+            sequenceFlagSign = 'sequence' + flagSign,
+            aPoint = '<a style="position: relative;" href="#' + rFlagSign + '" id="' + rFlagSign + '"></a>',
             renderer = new marked.Renderer(),
             rImage = renderer.image,
             rLink = renderer.link,
@@ -260,11 +262,17 @@
                 text = text.replace(flagSign, '');
                 result = aPoint;
             }
-            if (lang == "flow") {
+            if (lang == 'flow') {
                 // load flowchart
                 return '<pre><div class=' + flowFlagSign + '>' + text + '</div></pre>\n';
             }
-            return '<pre><code>' + highLightCode(text) + '</code></pre>\n'
+            if (lang.indexOf('sequence') > -1) {
+                // load sequenceDiagram
+                var sequenceOptions = lang.split(':', 2);
+                return dom = '<pre><div class=' + sequenceFlagSign + ' theme=' +
+                    (sequenceOptions.length > 1 ? sequenceOptions[1] : 'simple') + '>' + text + '</div></pre>\n';
+            }
+            return '<pre><code>' + highLightCode(text) + '</code></pre>\n';
         };
 
         renderer.image = function(href, title, text) {
@@ -301,6 +309,7 @@
             flagSign: flagSign,
             rFlagSign: rFlagSign,
             flowFlagSign: flowFlagSign,
+            sequenceFlagSign: sequenceFlagSign,
             aPoint: aPoint
         };
     })();
@@ -347,22 +356,24 @@
             }
             var onlyId = 0;
             // load flow diagram
-            $("." + options.flowFlagSign).each(function() {
-                    $(this).attr("id", ++onlyId + options.flowFlagSign);
+            $('.' + options.flowFlagSign).each(function() {
+                    $(this).attr('id', ++onlyId + options.flowFlagSign);
                     var content = $(this).text();
-                    $(this).text("");
-                    loadFlowChart(content, $(this).attr("id"));
-                    $(this).removeAttr("id");
-                    $(this).removeAttr("class");
-                })
+                    $(this).text('');
+                    loadFlowChart(content, $(this).attr('id'));
+                    $(this).removeAttr('id');
+                    $(this).removeAttr('class');
+                });
                 // load sequenceDiagram
-            $("." + options.sequenceFlagSign).each(function() {
-                    $(this).attr("id", ++onlyId + options.sequenceFlagSign);
+            $('.'+ options.sequenceFlagSign).each(function() {
+                    console.log(onlyId)
+                    $(this).attr('id', ++onlyId + options.sequenceFlagSign);
                     var content = $(this).text();
-                    $(this).text("");
-                    loadSequenceDiagram($(this).attr("id"), $(this).attr("theme"));
-                    $(this).removeAttr("id");
-                    $(this).removeAttr("class");
+                    $(this).text('');
+                    console.log(content);
+                    loadSequenceDiagram(content, $(this).attr('id'), $(this).attr('theme'));
+                    $(this).removeAttr('id');
+                    $(this).removeAttr('class');
                 })
                 // add MathJax preview
             window.MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
