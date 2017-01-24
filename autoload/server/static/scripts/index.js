@@ -1,12 +1,12 @@
 (function(global) {
     var TOTOPHEIGHT = 100;
     var mkdID, body, html, mkdContainer, options, isLoadMathJax;
-    mkdID = window.location.pathname.split('/').slice(2); // page 为一 ID，和编辑文件对应
+    mkdID = window.location.pathname.split('/').slice(2); // only page id
     body = document.body;
     html = document.querySelector('html');
-    mkdContainer = document.getElementById('js-markdown'); // markdown 渲染容器
+    mkdContainer = document.getElementById('js-markdown'); // markdown container dom
 
-    // 更新预览页面的标题
+    // update file title
     function updateTitle() {
         var slash = getSlash();
         var fileName = Base64.decode(location.search.slice(1)).split('&')[0].split(slash).pop();
@@ -74,7 +74,7 @@
         if (!isLoadMathJax) {
             isLoadMathJax = true;
             window.MATHJAX_PATH = Base64.decode(location.search.slice(1)).split('&')[1];
-            // 加载 mathjax
+            // loading mathjax
             h = document.getElementsByTagName('head')[0];
             s = document.createElement('script');
             s.type = 'text/javascript';
@@ -147,10 +147,20 @@
             }
         });
     }
+
+    function loadSequenceDiagram(id, theme = 'simple') {
+        if (theme != 'simple' && theme != 'hand') {
+            theme = 'simple';
+        }
+        $("#" + id).sequenceDiagram({
+            theme: theme
+        });
+    }
     options = (function() {
         var flagSign = '019600976811CE18D7D4F7699D774DFF', //md5 of the yuuko.cn
             rFlagSign = flagSign.split('').reverse().join(''),
-            flowFlagSign = 'flow' + flagSign;
+            flowFlagSign = 'flow' + flagSign,
+            sequenceFlagSign = 'sequence' + flagSign;
         aPoint = '<a style="position: relative;" href="#' + rFlagSign + '" id="' + rFlagSign + '"></a>',
             renderer = new marked.Renderer(),
             rImage = renderer.image,
@@ -251,7 +261,7 @@
                 result = aPoint;
             }
             if (lang == "flow") {
-                // 加载图表
+                // load flowchart
                 return '<pre><div class=' + flowFlagSign + '>' + text + '</div></pre>\n';
             }
             return '<pre><code>' + highLightCode(text) + '</code></pre>\n'
@@ -336,16 +346,25 @@
                 });
             }
             var onlyId = 0;
+            // load flow diagram
             $("." + options.flowFlagSign).each(function() {
-                $(this).attr("id", ++onlyId + options.flowFlagSign);
-                var content = $(this).text();
-                $(this).text("");
-                loadFlowChart(content, $(this).attr("id"));
-                $(this).removeAttr("id");
-                $(this).removeAttr("class");
-            })
-
-            // 更新 MathJax 预览
+                    $(this).attr("id", ++onlyId + options.flowFlagSign);
+                    var content = $(this).text();
+                    $(this).text("");
+                    loadFlowChart(content, $(this).attr("id"));
+                    $(this).removeAttr("id");
+                    $(this).removeAttr("class");
+                })
+                // load sequenceDiagram
+            $("." + options.sequenceFlagSign).each(function() {
+                    $(this).attr("id", ++onlyId + options.sequenceFlagSign);
+                    var content = $(this).text();
+                    $(this).text("");
+                    loadSequenceDiagram($(this).attr("id"), $(this).attr("theme"));
+                    $(this).removeAttr("id");
+                    $(this).removeAttr("class");
+                })
+                // add MathJax preview
             window.MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         });
     }

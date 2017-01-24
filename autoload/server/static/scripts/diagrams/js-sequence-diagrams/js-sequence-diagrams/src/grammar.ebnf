@@ -1,0 +1,25 @@
+/** js sequence diagrams
+ *  https://bramp.github.io/js-sequence-diagrams/
+ *  (c) 2012-2017 Andrew Brampton (bramp.net)
+ *  Simplified BSD license.
+ * 
+ * EBNF version of the grammar for diagraming purposes only
+ * Paste this into http://www.bottlecaps.de/rr/ui to generate the diagram 
+ */
+document ::= statement*
+
+statement ::=
+	( 'title' ':' message
+	| 'participant' actor ('as' alias)?
+	| 'note' (
+		( 'left of' | 'right of') actor
+		| 'over' (actor | actor ',' actor)
+		) ':' message
+	| actor ( '-' | '--' ) ( '>' | '>>' )? actor ':' message
+	)
+
+/*
+message ::= [^\n]+
+
+actor ::= [^\->:\n,]+
+*/

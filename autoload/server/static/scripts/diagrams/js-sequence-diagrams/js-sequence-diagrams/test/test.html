@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <link rel="stylesheet" href="../dist/sequence-diagram-min.css">
+        <style type="text/css">
+        .signal rect {
+            opacity: 0;
+        }
+        .signal text {
+            fill: #000000;
+        }
+
+        .note rect,
+        .note path {
+            fill: #ffff00;
+        }
+        .title rect,
+        .title path,
+        .actor rect,
+        .actor path {
+            fill: #ffffff
+        }
+        .signal text:hover {
+            fill: #aaaaaa
+        }
+        .note path {
+            stroke: #ff0000;
+            stroke-width: 100px;
+        }
+        </style>
+    </head>
+    <body>
+    	<textarea id="language" rows="10" cols="50">
+#Note left of A: Note to the\n left of A
+#Note right of A: Note to the\n right of A
+#Note over A: Note over A
+Note over A,B: Note over A,B
+    	</textarea>
+    	<button id="parse" type="button">Click Me!</button>  
+
+    	<div id="diagram"></div>
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <script src="../bower_components/underscore/underscore-min.js"></script>
+        <!--script src="../bower_components/lodash/dist/lodash.min.js"></script-->
+
+        <!-- Snap.svg -->
+        <script src="../bower_components/snap.svg/dist/snap.svg.js"></script>
+        <script src="../bower_components/bower-webfontloader/webfont.js"></script>
+
+        <!-- or Raphael -->
+        <script src="../bower_components/raphael/raphael.min.js"></script>
+
+        <script src="../build/diagram-grammar.js"></script>
+        <script src="../src/theme.js"></script>
+        <script src="../src/theme-snap.js"></script>
+        <script src="../src/theme-raphael.js"></script>
+        <script src="../fonts/daniel/daniel_700.font.js"></script>
+
+        <script src="../src/sequence-diagram.js"></script>
+        <script src="../src/jquery-plugin.js"></script>
+
+        <!--script src="../dist/sequence-diagram.js"></script-->
+        <!--script src="../dist/sequence-diagram-min.js"></script-->
+        <script>
+            $(document).ready(function(){
+                $('#parse').click(_.throttle( function() {
+
+                    //try {
+                        var diagram = Diagram.parse($('#language').val());
+                        console.log(diagram);
+
+                        diagram.drawSVG('diagram', {theme: 'hand'});
+                    //} catch (e) {
+                    //    console.log(e);
+                    //}
+                }, 100));
+            });
+        </script>
+    </body>
+</html>
+
+
+

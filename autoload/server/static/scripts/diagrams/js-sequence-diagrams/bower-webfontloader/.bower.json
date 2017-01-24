@@ -1,0 +1,16 @@
+{
+  "name": "bower-webfontloader",
+  "version": "1.6.6",
+  "main": "webfont.js",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/mdarse/bower-webfontloader",
+  "_release": "1.6.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.6.6",
+    "commit": "1838c476617c4256a317d928cbaffa2d50aa6e35"
+  },
+  "_source": "https://github.com/mdarse/bower-webfontloader.git",
+  "_target": "~1.6.x",
+  "_originalSource": "bower-webfontloader"
+}
