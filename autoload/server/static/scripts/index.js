@@ -261,6 +261,9 @@
                 text = text.replace(flagSign, '');
                 result = aPoint;
             }
+            if (lang == undefined) {
+                return '<pre><code>' + highLightCode(text) + '</code></pre>\n';
+            }
             if (lang == 'flow') {
                 // load flowchart
                 return '<pre><div class=' + flowFlagSign + '>' + text + '</div></pre>\n';
@@ -356,15 +359,15 @@
             var onlyId = 0;
             // load flow diagram
             $('.' + options.flowFlagSign).each(function() {
-                    $(this).attr('id', ++onlyId + options.flowFlagSign);
-                    var content = $(this).text();
-                    $(this).text('');
-                    loadFlowChart(content, $(this).attr('id'));
-                    $(this).removeAttr('id');
-                    $(this).removeAttr('class');
-                });
-                // load sequenceDiagram
-            $('.'+ options.sequenceFlagSign).each(function() {
+                $(this).attr('id', ++onlyId + options.flowFlagSign);
+                var content = $(this).text();
+                $(this).text('');
+                loadFlowChart(content, $(this).attr('id'));
+                $(this).removeAttr('id');
+                $(this).removeAttr('class');
+            });
+            // load sequenceDiagram
+            $('.' + options.sequenceFlagSign).each(function() {
                     $(this).attr('id', ++onlyId + options.sequenceFlagSign);
                     var content = $(this).text();
                     $(this).text('');
