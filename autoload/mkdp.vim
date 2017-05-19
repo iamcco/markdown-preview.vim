@@ -123,10 +123,14 @@ fun! s:browserStart() abort "function for opening the browser
         exec s:py_cmd . 'vim.command("let g:mkdp_cwd = \"" + base64.b64encode(vim.eval("g:mkdp_cwd").encode("utf-8")).decode("utf-8") + "\"")'
     endif
 
-    if s:mkdp_is_windows()
-        exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd
+    if exists('g:mkdp_browserfunc') && len(g:mkdp_browserfunc) > 0
+        execute 'call ' . g:mkdp_browserfunc . '("' . "http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . '")'
     else
-        call system(g:mkdp_path_to_chrome . " \"http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . "\" >/dev/null 2>&1 &")
+        if s:mkdp_is_windows()
+            exec "silent !start " . g:mkdp_path_to_chrome . " http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd
+        else
+            call system(g:mkdp_path_to_chrome . " \"http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . "\" &>/dev/null &")
+        endif
     endif
 endfun
 
