@@ -43,6 +43,25 @@ if !exists('g:mkdp_command_for_global')
     let g:mkdp_command_for_global = 0
 endif
 
+function! MKDP_browserfunc_default(url)
+    if has("win32") || has("win64")
+        " windows
+        execute "silent !cmd /c start " . a:url . '.html'
+    elseif has("unix")
+        silent! let s:uname=system("uname")
+        if s:uname=="Darwin\n"
+            " mac
+            let dummy = system('open "' . a:url . '"')
+        else
+            " unix
+            let dummy = system('xdg-open "' . a:url . '"')
+        endif
+    endif
+endfunction
+if !exists('g:mkdp_browserfunc')
+    let g:mkdp_browserfunc='MKDP_browserfunc_default'
+endif
+
 let g:mkdp_server_started = 0
 
 fu! s:serverStart() abort
