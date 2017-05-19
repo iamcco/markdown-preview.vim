@@ -52,6 +52,10 @@ MarkdownPreviewStop command before using MarkdownPreview command
     let g:mkdp_path_to_chrome = "google-chrome"
     " path to the chrome or the command to open chrome(or other modern browsers)
 
+    let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+    " callback vim function to open browser, the only param is the url to open
+    " if set, g:mkdp_path_to_chrome would be ignored
+
     let g:mkdp_auto_start = 0
     " set to 1, the vim will open the preview window once enter the markdown
     " buffer
@@ -159,6 +163,10 @@ Plug 'iamcco/markdown-preview.vim'
 ```
     let g:mkdp_path_to_chrome = "google-chrome"
     " 设置 chrome 浏览器的路径（或是启动 chrome（或其他现代浏览器）的命令）
+
+    let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+    " vim 回调函数, 参数为要打开的 url
+    " 如果设置了该参数, g:mkdp_path_to_chrome 将被忽略
 
     let g:mkdp_auto_start = 0
     " 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
