@@ -46,7 +46,7 @@ Plug 'iamcco/markdown-preview.vim'
 > when MarkdownPreview command can't open preview window, you can use the
 MarkdownPreviewStop command before using MarkdownPreview command
 
-**Defaul Setting:**
+**Default Setting:**
 
 ```
     let g:mkdp_path_to_chrome = "google-chrome"
