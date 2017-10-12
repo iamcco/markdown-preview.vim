@@ -40,7 +40,7 @@
         var slash = getSlash();
         var bases = Base64.decode(base.slice(1)).split('&')[0].split(slash).slice(0, -1);
         var paths = path.split(slash);
-        if(/^https?:?/i.test(paths[0])) {
+        if(/^https?:?/i.test(paths[0]) || /^\/DIYURL?.*$/.test(path)) {
             return path;
         } else if(/^$|^[a-zA-Z]:.*$/.test(paths[0])) {
             return '/DIYURL?' + Base64.encode(path);
