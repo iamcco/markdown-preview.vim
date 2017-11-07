@@ -20,7 +20,7 @@ set cpo&vim
 "default setting
 
 if !exists('g:mkdp_path_to_chrome')
-    let g:mkdp_path_to_chrome = 'google-chrome'
+    let g:mkdp_path_to_chrome = '' " 'google-chrome'
 endif
 
 if !exists('g:mkdp_auto_start')
