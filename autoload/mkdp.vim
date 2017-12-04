@@ -16,7 +16,7 @@ if !exists('g:mkdp_py_version')
         let g:mkdp_py_version = 3
         let s:py_cmd = 'py3 '
     else
-        echo '[Plugin: markdown-preview]: requires vim has python/python3 features'
+        echoerr '[Plugin: markdown-preview]: requires vim has python/python3 features'
         finish
     endif
 else
@@ -78,7 +78,7 @@ fun! mkdp#serverStart() abort "start server
     try
         call s:serverStart()
     catch /.*/
-        echo 'server start failed'
+        echoerr 'server start failed'
     endtry
 endfu
 
@@ -132,7 +132,7 @@ fun! s:browserStart() abort "function for opening the browser
     elseif exists('g:mkdp_browserfunc') && len(g:mkdp_browserfunc) > 0
         execute 'call ' . g:mkdp_browserfunc . '("' . "http://127.0.0.1:" . g:mkdp_port . "/markdown/" . g:mkdp_prefix . bufnr('%') . '?' . g:mkdp_cwd . '")'
     else
-        echo '[Plugin: markdown-preview]: g:mkdp_path_to_chrome or g:mkdp_browserfunc not set'
+        echoerr '[Plugin: markdown-preview]: g:mkdp_path_to_chrome or g:mkdp_browserfunc not set'
     endif
 endfun
 
