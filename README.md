@@ -132,13 +132,4 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
 
 ### Buy Me A Coffee ☕️
 
-<div style="height: 294px;">
-<div style="width: 257px;height: 294px;text-align: center;float:left;margin-right: 10px;">
-WeChat
-<img width="257" height="294" src="https://user-images.githubusercontent.com/5492542/42769573-12c8ec88-8955-11e8-908f-e584102df560.png" alt="">
-</div>
-<div style="width: 257px;height: 294px;text-align: center;float: left;">
-alipay
-<img width="257" height="294" src="https://user-images.githubusercontent.com/5492542/42769382-9cdd702a-8954-11e8-93c2-f8126847ae9d.png" alt="">
-</div>
-</div>
+![image](https://user-images.githubusercontent.com/5492542/42771079-962216b0-8958-11e8-81c0-520363ce1059.png)
