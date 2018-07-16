@@ -43,6 +43,8 @@ port            = 8686
 sockets         = {}
 socketList      = set();
 
+tempData = {}
+
 def wLog():
     if not os.path.exists('./log'):
         os.mkdir('./log')
@@ -60,8 +62,6 @@ def dealConnectLog(f):
             exit(0)
         except:
             wLog()
-            conn.send(OK_HEADER.encode(ENCODING))
-            conn.close()
     return _dealConnect
 
 def dealLog(f):
@@ -104,10 +104,17 @@ class Util():
         data = WebSocket.recv(sock)
         if data == '\x03\xe9' or data == False:
             socketList.remove(sock)
+            templist = []
             for item in sockets:
-                if sockets[item] == sock:
-                    sockets[item] = None
+                for idx,socket in enumerate(sockets[item]):
+                    if socket == sock:
+                        templist.append(socket)
                     break
+                if len(templist) > 0:
+                    for i in templist:
+                        sockets[item].remove(i)
+                    templist = []
+                    break;
 
     @staticmethod
     def doGet(conn, hItmes, path):
@@ -117,13 +124,14 @@ class Util():
                 key, val = header.split(u': ')
                 if key == u'Sec-WebSocket-Key':
                     bufnr = paths[2]
-                    if bufnr in sockets:
-                        if sockets[bufnr] != None:      #if the socket is exists close it
-                            sockets[bufnr].close()
-                            socketList.remove(sockets[bufnr])
-                    sockets[bufnr] = conn
+                    if bufnr not in sockets:
+                        sockets[bufnr] = []
+                    sockets[bufnr].append(conn)
                     socketList.add(conn)
                     conn.send((SOCKET_HEADER % Util.getKey(val)).encode(ENCODING))      #complete the shakehand
+                    # send temp data
+                    if bufnr in tempData:
+                        WebSocket.send(conn, tempData[bufnr])
                     break
         elif paths[1] == u'markdown':       #get markdown preview page
             f = open(u'./static/htmls/index.html', u'r')
@@ -185,15 +193,12 @@ class Util():
             if key == u'Content-Length':
                 body = Util.getData(conn, body, int(val))
                 bufnr = path[1:]
-                if bufnr in sockets:
-                    if sockets[bufnr] != None:
-                        conn.send(OK_HEADER.encode(ENCODING))
-                        conn.close()
-                        WebSocket.send(sockets[bufnr], body)
-                    else:
-                        conn.send(NO_FOUND_HEADER.encode(ENCODING))
-                        conn.close()
-                        sockets.pop(bufnr)
+                if bufnr in sockets and len(sockets[bufnr]) > 0:
+                    conn.send(OK_HEADER.encode(ENCODING))
+                    conn.close()
+                    tempData[bufnr] = body
+                    for socket in sockets[bufnr]:
+                        WebSocket.send(socket, body)
                 else:
                     conn.send(OK_HEADER.encode(ENCODING))
                     conn.close()
@@ -205,10 +210,12 @@ class Util():
         conn.close()
         bufnr = path[1:]
         if bufnr in sockets:
-            sock = sockets[bufnr]
-            sock.close()
-            socketList.remove(sock)
-            sockets.pop(bufnr)
+            for socket in sockets[bufnr]:
+                socket.close()
+                socketList.remove(socket)
+            sockets[bufnr] = []
+            if bufnr in tempData:
+                del tempData[bufnr]
 
     @staticmethod
     def getKey(key):
@@ -268,7 +275,7 @@ class WebSocket():
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        server.bind((u'127.0.0.1', port))
+        server.bind((host, port))
         server.listen(100)
     except Exception as e:
         exit(0)
@@ -287,6 +294,11 @@ if __name__ == u'__main__':
     # get the port if have
     if len(sys.argv) >= 2:
         port = int(sys.argv[1])
+
+    if len(sys.argv) >= 3:
+        host = sys.argv[2]
+    else:
+        host = u'127.0.0.1'
 
     # change the work directory to the server.py
     cwd = os.path.split(os.path.realpath(__file__))[0]

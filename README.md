@@ -76,6 +76,10 @@ MarkdownPreviewStop command before using MarkdownPreview command
     let g:mkdp_command_for_global = 0
     " set to 1, the MarkdownPreview command can be use for all files,
     " by default it just can be use in markdown file
+
+    let g:mkdp_open_to_the_world = 0
+    " set to 1, preview server available to others in your network
+    " by default, the server only listens on localhost (127.0.0.1)
 ```
 
 **Key Mapping:**
@@ -117,6 +121,7 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
 
 ### Changelog
 
+* 2017/07/16: add `g:mkdp_open_to_the_world` option
 * 2016/11/19: MathJax support with [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) plugin
 * 2016/08/28: set the title of preview page with file name
 * 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
@@ -187,6 +192,10 @@ Plug 'iamcco/markdown-preview.vim'
     let g:mkdp_command_for_global = 0
     " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
     " 文件可以使用改命令
+
+    let g:mkdp_open_to_the_world = 0
+    " 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
+    " 默认只监听本地（127.0.0.1），其他计算机不能访问
 ```
 
 **键位绑定：**
@@ -227,6 +236,7 @@ A: 如果需要在火狐浏览器中启用自动关闭预览窗口，需要相�
 
 ### Changelog
 
+* 2017/07/16: 增加 `g:mkdp_open_to_the_world` 选项
 * 2016/11/19: 通过辅助插件 [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) 支持数学公式显示
 * 2016/05/18: 设置预览页面的标题为文件的名字
 * 2016/05/18: 支持按键绑定，并增加新的 `g:mkdp_command_for_global` 配置项

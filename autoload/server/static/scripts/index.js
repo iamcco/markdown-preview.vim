@@ -231,7 +231,7 @@
     });
 
     function openConn() {
-        global.conn = new WebSocket('ws://127.0.0.1:' + window.location.port + '/WebSocket/' + mkdID);
+        global.conn = new WebSocket('ws://' + window.location.host + '/WebSocket/' + mkdID);
         global.conn.addEventListener('open', onOpen);
         global.conn.addEventListener('close', onClose);
         global.conn.addEventListener('message', onMessage);

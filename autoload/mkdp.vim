@@ -96,9 +96,18 @@ endfu
 fun! s:serverStart() abort "function for starting the server
     let g:mkdp_port = g:mkdp_port + localtime()[7:10]
     if s:mkdp_is_windows()
-        exec "silent !start /b python " . '"' . s:path_to_server . '" ' . g:mkdp_port
+        let l:cmd = "silent !start /b python " . '"' . s:path_to_server . '" ' . g:mkdp_port
+        if exists('g:mkdp_open_to_the_world')
+            let l:cmd = l:cmd . ' 0.0.0.0'
+        endif
+        exec lcmd
     else
-        call system("python " . s:path_to_server . " " . g:mkdp_port . " >/dev/null 2>&1 &")
+        let l:cmd = "python " . s:path_to_server . " " . g:mkdp_port
+        if exists('g:mkdp_open_to_the_world')
+            let l:cmd = l:cmd . ' 0.0.0.0'
+        endif
+        echo l:cmd
+        call system(l:cmd . " >/dev/null 2>&1 &")
     endif
 endfun
 

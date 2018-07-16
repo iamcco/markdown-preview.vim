@@ -55,6 +55,11 @@ Defaul Setting:
     " set to 1, the MarkdownPreview command can be use for all files,
     " by default it just can be use in markdown file
 
+    let g:mkdp_open_to_the_world = 0
+    " set to 1, server available to others in your network
+    " by default, the server only listens on localhost
+
+
 Key Mapping:
 
 By default this Plugin has no mapping, if you want to has your own mapping
