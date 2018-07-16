@@ -227,7 +227,7 @@
             return code.replace('code' + options.flagSign + 'code', options.aPoint);
         },
         renderer: options.renderer,
-        breaks: true
+        breaks: false
     });
 
     function openConn() {

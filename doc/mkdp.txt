@@ -135,6 +135,10 @@ A: if you want the plugin auto close the preview window on firefox, you have to 
     " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
     " 文件可以使用改命令
 
+    let g:mkdp_open_to_the_world = 0
+    " 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
+    " 默认只监听本地（127.0.0.1），其他计算机不能访问
+
 键位绑定：
 
 默认情况下，插件没有进行任何的按键绑定，如果想绑定按键去预览 markdown 文件，可以绑定

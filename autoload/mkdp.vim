@@ -106,7 +106,6 @@ fun! s:serverStart() abort "function for starting the server
         if exists('g:mkdp_open_to_the_world')
             let l:cmd = l:cmd . ' 0.0.0.0'
         endif
-        echo l:cmd
         call system(l:cmd . " >/dev/null 2>&1 &")
     endif
 endfun
