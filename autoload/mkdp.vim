@@ -100,13 +100,13 @@ fun! s:serverStart() abort "function for starting the server
         if exists('g:mkdp_open_to_the_world')
             let l:cmd = l:cmd . ' 0.0.0.0'
         endif
-        exec l:cmd
+        exec l:cmd | redraw
     else
         let l:cmd = "python " . s:path_to_server . " " . g:mkdp_port
         if exists('g:mkdp_open_to_the_world')
             let l:cmd = l:cmd . ' 0.0.0.0'
         endif
-        call system(l:cmd . " >/dev/null 2>&1 &")
+        call system(l:cmd . " >/dev/null 2>&1 &") | redraw
     endif
 endfun
 
