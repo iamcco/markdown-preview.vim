@@ -6,7 +6,7 @@
 
 ### 安装
 
-使用 [vim-plug][vim-plug]:
+使用 [vim-plug](https://github.com/junegunn/vim-plug):
 
 在 `.vimrc` 或 `init.vim` 配置文件中添加 `Plug 'iamcco/markdown-preview.vim'` 然后运行 `:PlugInstall` 命令
 
