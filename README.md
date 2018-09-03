@@ -7,8 +7,8 @@
 Using the markdown-preview.vim plugin you can preview markdown on real-time
 through a browser
 
-> this plugin need your vim support py2/py3 features  
-> test on windows/ubuntu14/Mac OS X
+> this plugin needs your vim to support py2/py3 features  
+> tested on windows/ubuntu14/Mac OS X
 
 ### screenshot
 
