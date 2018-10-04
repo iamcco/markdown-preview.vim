@@ -44,18 +44,29 @@ if !exists('g:mkdp_command_for_global')
 endif
 
 function! MKDP_browserfunc_default(url)
-    if has("win32") || has("win64")
-        " windows
-        execute "silent !cmd /c start " . a:url . '.html'
-    elseif has("unix")
-        silent! let s:uname=system("uname")
-        if s:uname=="Darwin\n"
-            " mac
-            let dummy = system('open "' . a:url . '"')
-        else
-            " unix
-            let dummy = system('xdg-open "' . a:url . '"')
-        endif
+    " windows, including mingw
+    if has('win32') || has('win64') || has('win32unix')
+        let l:cmd = "start " . a:url . '.html'
+    " mac os
+    elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
+        let l:cmd = 'open ' . a:url
+    " linux
+    elseif executable('xdg-open')
+        let l:cmd = 'xdg-open ' . a:url
+    " can not find the browser
+    else
+        echoerr "Browser not found."
+        return
+    endif
+
+    " Async open the url in browser
+    if exists('*jobstart')
+        call jobstart(l:cmd)
+    elseif exists('*job_start')
+        call job_start(l:cmd)
+    else
+    " if async is not supported, use `system` command
+        call system(l:cmd)
     endif
 endfunction
 if !exists('g:mkdp_browserfunc')
