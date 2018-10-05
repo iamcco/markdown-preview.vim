@@ -22,7 +22,7 @@ through a browser
 
 ### Installation
 
-with [vim-plug][vim-plug]:
+with [vim-plug](https://github.com/junegunn/vim-plug):
 
 add `Plug 'iamcco/markdown-preview.vim'` to the `vimrc` or `init.vim` file and type `:PlugInstall`
 
