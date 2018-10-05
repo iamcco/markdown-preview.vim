@@ -40,7 +40,10 @@ let g:mkdp_cwd = ''
 "python/python3 import init
 exec s:py_cmd . 'import vim'
 exec s:py_cmd . 'import sys'
+exec s:py_cmd . 'import os'
+exec s:py_cmd . 'import re'
 exec s:py_cmd . 'cwd = vim.eval("expand(\"<sfile>:p:h\")")'
+exec s:py_cmd . "cwd = re.sub(r'(?<=^.)', r':', os.sep.join(cwd.split('/')[1:])) if os.name == 'nt' and cwd.startswith('/') else cwd"
 exec s:py_cmd . 'sys.path.insert(0,cwd)'
 exec s:py_cmd . 'from server import send'
 exec s:py_cmd . 'import base64'
