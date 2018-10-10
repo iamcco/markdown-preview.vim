@@ -49,10 +49,10 @@ function! MKDP_browserfunc_default(url)
         let l:cmd = "start " . a:url . '.html'
     " mac os
     elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
-        let l:cmd = 'open ' . a:url
+        let l:cmd = 'open "' . a:url . '"'
     " linux
     elseif executable('xdg-open')
-        let l:cmd = 'xdg-open ' . a:url
+        let l:cmd = 'xdg-open "' . a:url . '"'
     " can not find the browser
     else
         echoerr "Browser not found."
@@ -61,9 +61,9 @@ function! MKDP_browserfunc_default(url)
 
     " Async open the url in browser
     if exists('*jobstart')
-        call jobstart(l:cmd)
+        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), { -> jobstart(l:cmd) })
     elseif exists('*job_start')
-        call job_start(l:cmd)
+        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), { -> job_start(l:cmd) })
     else
     " if async is not supported, use `system` command
         call system(l:cmd)
