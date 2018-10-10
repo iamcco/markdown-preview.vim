@@ -112,14 +112,21 @@ fun! s:serverClose() abort
     endif
 endfu
 
+function s:auto_start_server() abort
+  call s:serverStart()
+  if exists('*timer_start')
+    call timer_start(get(g:, 'mkdp_delay_start_browser', 800), {-> mkdp#markdownRefresh()})
+  endif
+endfunction
+
 if g:mkdp_auto_start
 
     "if auto start, launch the server when enter the mkd buffer
 
     if g:mkdp_command_for_global
-        au BufEnter * call s:serverStart()
+        au BufEnter * call s:auto_start_server()
     else
-        au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} call s:serverStart()
+        au BufEnter *.{md,mkd,markdown,mdown,mkdn,mdwn} call s:auto_start_server()
     endif
 endif
 
