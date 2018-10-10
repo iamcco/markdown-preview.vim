@@ -184,6 +184,11 @@ class Util():
     def doPost(conn):       #close the server
         conn.send(OK_HEADER.encode(ENCODING))
         conn.close()
+        for bufnr in sockets:
+            for socket in sockets[bufnr]:
+                WebSocket.send(socket, '[019600976811CE18D7D4F7699D774DFF](close)')
+                socket.close()
+                socketList.remove(socket)
         exit(0)
 
     @staticmethod
