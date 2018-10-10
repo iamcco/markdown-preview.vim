@@ -245,7 +245,12 @@
     }
 
     function onMessage(event) {
+      var data = event.data
+      if (data === '[019600976811CE18D7D4F7699D774DFF](close)') {
+        winClose()
+      } else {
         mkdRefresh(event.data);
+      }
     }
 
     function mkdRefresh(data) {

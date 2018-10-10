@@ -211,6 +211,7 @@ class Util():
         bufnr = path[1:]
         if bufnr in sockets:
             for socket in sockets[bufnr]:
+                WebSocket.send(socket, '[019600976811CE18D7D4F7699D774DFF](close)')
                 socket.close()
                 socketList.remove(socket)
             sockets[bufnr] = []
