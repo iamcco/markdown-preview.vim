@@ -145,6 +145,9 @@ fun! s:browserStart() abort "function for opening the browser
     else
         echoerr '[Plugin: markdown-preview]: g:mkdp_path_to_chrome or g:mkdp_browserfunc not set'
     endif
+    if exists('*timer_start')
+      call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), {-> mkdp#markdownRefresh()})
+    endif
 endfun
 
 fun! s:browserClose() abort "function for closing the browser
