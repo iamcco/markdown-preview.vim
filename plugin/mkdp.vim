@@ -115,7 +115,7 @@ endfu
 function s:auto_start_server() abort
   call s:serverStart()
   if exists('*timer_start')
-    call timer_start(get(g:, 'mkdp_delay_auto_refresh', 800), {-> mkdp#markdownRefresh()})
+    call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), {-> mkdp#markdownRefresh()})
   endif
 endfunction
 
