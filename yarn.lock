@@ -4732,9 +4732,9 @@ terser-webpack-plugin@1.0.2:
     worker-farm "^1.5.2"
 
 terser@^3.8.1:
-  version "3.10.0"
-  resolved "http://registry.npm.taobao.org/terser/download/terser-3.10.0.tgz#6ae15dafecbd02c9788d5f36d27fca32196b533a"
-  integrity sha1-auFdr+y9Asl4jV820n/KMhlrUzo=
+  version "3.10.1"
+  resolved "http://registry.npm.taobao.org/terser/download/terser-3.10.1.tgz#59c8cf87262d59e018ded4df30f834b602b1e232"
+  integrity sha1-WcjPhyYtWeAY3tTfMPg0tgKx4jI=
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
