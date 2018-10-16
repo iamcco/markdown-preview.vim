@@ -26,3 +26,29 @@ endfunction
 function! mkdp#rpc#start_server() abort
   let s:mkdp_channel_id = jobstart(['node', s:mkdp_server_script], s:mkdp_opts)
 endfunction
+
+function! mkdp#rpc#stop_server() abort
+  if s:mkdp_channel_id !=# -1
+    call jobstop(s:mkdp_channel_id)
+  endif
+  let s:mkdp_channel_id = -1
+  let mkdp_node_channel_id = -1
+endfunction
+
+function! mkdp#rpc#get_server_status() abort
+  if s:mkdp_channel_id ==# -1
+    return -1
+  elseif !exists('g:mkdp_node_channel_id') || g:mkdp_node_channel_id ==# -1
+    return 0
+  endif
+  return 1
+endfunction
+
+function! mkdp#rpc#preview_refresh() abort
+  call rpcnotify(g:mkdp_node_channel_id, 'refresh_content')
+endfunction
+
+function! mkdp#rpc#preview_close() abort
+  call rpcnotify(g:mkdp_node_channel_id, 'preview_close')
+endfunction
+

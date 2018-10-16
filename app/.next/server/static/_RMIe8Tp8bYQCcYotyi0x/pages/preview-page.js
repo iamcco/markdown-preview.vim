@@ -178,12 +178,9 @@ function (_React$Component) {
       });
       window.socket = socket;
       socket.on('refresh_content', function (_ref) {
-        var content = _ref.content;
-        console.log('refresh: ', content);
-      });
-      socket.on('refresh_cursor', function (_ref2) {
-        var cursor = _ref2.cursor;
-        console.log('refresh_cursor', cursor);
+        var cursor = _ref.cursor,
+            content = _ref.content;
+        console.log('refresh: ', cursor, content);
       });
       socket.on('connect', function (data) {
         console.log('connect: ', data);

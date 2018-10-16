@@ -7,9 +7,8 @@ const nextRoutes = require('next-routes')
 const { createServer } = require('http')
 
 // TODO: dev
-const app = next({ dev: process.env.NODE_ENV !== 'production' })
+const app = next({ dev: false })
 const clients = {}
-const tempData = {}
 
 const routes = nextRoutes()
   .add('/page/:bufnr', '/preview-page')
@@ -22,7 +21,7 @@ const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
 app.prepare().then(async () => {
   const server = createServer(handler)
   const io = require('socket.io')(server)
-  io.on('connection', function (client) {
+  io.on('connection', async (client) => {
     const { handshake = { query: {} } } = client
     const bufnr = handshake.query.bufnr
 
@@ -31,9 +30,17 @@ app.prepare().then(async () => {
     clients[bufnr] = clients[bufnr] || []
     clients[bufnr].push(client)
 
-    if (tempData[bufnr]) {
-      client.emit('refresh_content', { ...tempData[bufnr] })
-    }
+    const buffers = await plugin.nvim.buffers
+    buffers.forEach(async (buffer) => {
+      if (buffer.id === Number(bufnr)) {
+        const cursor = await plugin.nvim.call('getpos', '.')
+        const content = await buffer.getLines()
+        client.emit('refresh_content', {
+          cursor,
+          content
+        })
+      }
+    })
 
     client.on('disconnect', function () {
       console.log('disconnect: ', client.id)
@@ -55,6 +62,7 @@ app.prepare().then(async () => {
     plugin.init({
       refreshPage
     })
+    plugin.nvim.call('mkdp#util#open_browser')
   })
 })
 

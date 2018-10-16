@@ -20,12 +20,8 @@ export default class PreviewPage extends React.Component {
 
     window.socket = socket
 
-    socket.on('refresh_content', ({ content }) => {
-      console.log('refresh: ', content)
-    })
-
-    socket.on('refresh_cursor', ({ cursor }) => {
-      console.log('refresh_cursor', cursor)
+    socket.on('refresh_content', ({ cursor, content }) => {
+      console.log('refresh: ', cursor, content)
     })
 
     socket.on('connect', (data) => {
