@@ -11,3 +11,21 @@
 - meoji
 - plantuml
 - sync scroll
+
+javascript
+```javascript
+function test() {
+    return 0
+}
+
+console.log('hello world')
+
+test()
+```
+
+bash
+```bash
+# comment
+
+export path=$PATH;/bin
+```

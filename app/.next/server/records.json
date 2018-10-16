@@ -2,19 +2,21 @@
   "modules": {
     "byIdentifier": {
       "external \"react\"": 0,
-      "external \"next/head\"": 1,
-      "external \"socket.io-client\"": 2,
-      "multi ./pages/preview-page.jsx": 3,
-      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/preview-page.jsx": 4,
-      "multi ../node_modules/next/dist/pages/_app.js": 5,
-      "../node_modules/next/dist/pages/_app.js": 6,
-      "external \"next/app\"": 7,
-      "multi ../node_modules/next/dist/pages/_error.js": 8,
-      "../node_modules/next/dist/pages/_error.js": 9,
-      "external \"next/error\"": 10,
-      "multi ../node_modules/next/dist/pages/_document.js": 11,
-      "../node_modules/next/dist/pages/_document.js": 12,
-      "external \"next/document\"": 13
+      "external \"highlight.js\"": 1,
+      "external \"next/head\"": 2,
+      "external \"socket.io-client\"": 3,
+      "external \"markdown-it\"": 4,
+      "multi ./pages/preview-page.jsx": 5,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/preview-page.jsx": 6,
+      "multi ../node_modules/next/dist/pages/_app.js": 7,
+      "../node_modules/next/dist/pages/_app.js": 8,
+      "external \"next/app\"": 9,
+      "multi ../node_modules/next/dist/pages/_error.js": 10,
+      "../node_modules/next/dist/pages/_error.js": 11,
+      "external \"next/error\"": 12,
+      "multi ../node_modules/next/dist/pages/_document.js": 13,
+      "../node_modules/next/dist/pages/_document.js": 14,
+      "external \"next/document\"": 15
     },
     "usedIds": {
       "0": 0,
@@ -30,15 +32,17 @@
       "10": 10,
       "11": 11,
       "12": 12,
-      "13": 13
+      "13": 13,
+      "14": 14,
+      "15": 15
     }
   },
   "chunks": {
     "byName": {
-      "static/_RMIe8Tp8bYQCcYotyi0x/pages/preview-page.js": 0,
-      "static/_RMIe8Tp8bYQCcYotyi0x/pages/_app.js": 1,
-      "static/_RMIe8Tp8bYQCcYotyi0x/pages/_error.js": 2,
-      "static/_RMIe8Tp8bYQCcYotyi0x/pages/_document.js": 3
+      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/preview-page.js": 0,
+      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_app.js": 1,
+      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_error.js": 2,
+      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_document.js": 3
     },
     "bySource": {},
     "usedIds": [

@@ -19,8 +19,11 @@ const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
 })
 
 app.prepare().then(async () => {
+  // http server
   const server = createServer(handler)
+  // websocket server
   const io = require('socket.io')(server)
+
   io.on('connection', async (client) => {
     const { handshake = { query: {} } } = client
     const bufnr = handshake.query.bufnr

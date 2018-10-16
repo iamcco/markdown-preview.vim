@@ -2,8 +2,7 @@
   "name": "markdown-preview.vim",
   "version": "0.0.1",
   "description": "markdown preview plugin for (neo)vim",
-  "main": "./lib/index.js",
-  "bin": "./bin/server.js",
+  "bin": "./app/server.js",
   "repository": "https://github.com/iamcco/markdown-preview.vim.git",
   "author": "年糕小豆汤 <ooiss@qq.com>",
   "license": "MIT",
@@ -13,7 +12,9 @@
     "build": "tsc -p ./ && cd app && rm -rf ./.next && next build"
   },
   "dependencies": {
+    "highlight.js": "^9.13.0",
     "log4js": "^3.0.6",
+    "markdown-it": "^8.4.2",
     "neovim": "^4.2.1",
     "next": "^7.0.2",
     "next-routes": "^1.4.2",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.11.7",
+    "babel-plugin-preval": "^3.0.1",
     "prettier": "^1.14.3",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
