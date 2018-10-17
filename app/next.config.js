@@ -1,5 +1,10 @@
 
 module.exports = {
-  pageExtensions: [ 'jsx' ]
+  pageExtensions: [ 'jsx' ],
+  exportPathMap: async function () {
+    return {
+      '/': { page: '/' }
+    }
+  }
 }
 

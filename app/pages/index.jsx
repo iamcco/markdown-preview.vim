@@ -2,25 +2,9 @@ import React from 'react'
 import Head from 'next/head'
 import io from 'socket.io-client'
 import MarkdownIt from 'markdown-it'
+import mk from 'markdown-it-katex'
 import hljs from 'highlight.js'
 
-const MARKDOWN_STYLE = './pages/markdown.css'
-const HLJS_STYLE = '../node_modules/highlight.js/styles/github.css'
-
-// eslint-disable-next-line
-const HLJSStyle = preval`
-      const fs = require('fs')
-      module.exports = fs.readFileSync("${HLJS_STYLE}").toString()
-    `
-// eslint-disable-next-line
-const MARKDOWNStyle = preval`
-      const fs = require('fs')
-      module.exports = fs.readFileSync("${MARKDOWN_STYLE}").toString()
-    `
-const style = `
-${MARKDOWNStyle}
-${HLJSStyle}
-`
 export default class PreviewPage extends React.Component {
   constructor (props) {
     super(props)
@@ -63,6 +47,9 @@ export default class PreviewPage extends React.Component {
         return '' // use external default escaping
       }
     })
+
+    // katex
+    this.md.use(mk)
   }
 
   componentDidMount () {
@@ -101,11 +88,10 @@ export default class PreviewPage extends React.Component {
       <React.Fragment>
         <Head>
           <title>preview page</title>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: style
-            }}
-          />
+          <link rel="stylesheet" href="/_static/markdown.css" />
+          <link rel="stylesheet" href="/_static/highlight.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css" />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css" />
         </Head>
         <section
           className="markdown-body"

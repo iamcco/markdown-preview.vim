@@ -6,17 +6,18 @@
       "external \"next/head\"": 2,
       "external \"socket.io-client\"": 3,
       "external \"markdown-it\"": 4,
-      "multi ./pages/preview-page.jsx": 5,
-      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/preview-page.jsx": 6,
-      "multi ../node_modules/next/dist/pages/_app.js": 7,
-      "../node_modules/next/dist/pages/_app.js": 8,
-      "external \"next/app\"": 9,
-      "multi ../node_modules/next/dist/pages/_error.js": 10,
-      "../node_modules/next/dist/pages/_error.js": 11,
-      "external \"next/error\"": 12,
-      "multi ../node_modules/next/dist/pages/_document.js": 13,
-      "../node_modules/next/dist/pages/_document.js": 14,
-      "external \"next/document\"": 15
+      "external \"markdown-it-katex\"": 5,
+      "multi ./pages/index.jsx": 6,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 7,
+      "multi ../node_modules/next/dist/pages/_app.js": 8,
+      "../node_modules/next/dist/pages/_app.js": 9,
+      "external \"next/app\"": 10,
+      "multi ../node_modules/next/dist/pages/_error.js": 11,
+      "../node_modules/next/dist/pages/_error.js": 12,
+      "external \"next/error\"": 13,
+      "multi ../node_modules/next/dist/pages/_document.js": 14,
+      "../node_modules/next/dist/pages/_document.js": 15,
+      "external \"next/document\"": 16
     },
     "usedIds": {
       "0": 0,
@@ -34,15 +35,16 @@
       "12": 12,
       "13": 13,
       "14": 14,
-      "15": 15
+      "15": 15,
+      "16": 16
     }
   },
   "chunks": {
     "byName": {
-      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/preview-page.js": 0,
-      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_app.js": 1,
-      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_error.js": 2,
-      "static/8jXd9a1PDE6ZFF9lOyVQq/pages/_document.js": 3
+      "static/6EDAHwF6_XqGF~UoIEahp/pages/index.js": 0,
+      "static/6EDAHwF6_XqGF~UoIEahp/pages/_app.js": 1,
+      "static/6EDAHwF6_XqGF~UoIEahp/pages/_error.js": 2,
+      "static/6EDAHwF6_XqGF~UoIEahp/pages/_document.js": 3
     },
     "bySource": {},
     "usedIds": [

@@ -3,24 +3,28 @@ process.chdir(__dirname)
 // attach nvim
 const { plugin } = require('./nvim')
 const next = require('next')
-const nextRoutes = require('next-routes')
 const { createServer } = require('http')
+const fs = require('fs')
+const path = require('path')
 
 // TODO: dev
 const app = next({ dev: false })
 const clients = {}
 
-const routes = nextRoutes()
-  .add('/page/:bufnr', '/preview-page')
-
-const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
-  console.log(route.page, query)
-  app.render(req, res, route.page, query)
-})
-
 app.prepare().then(async () => {
   // http server
-  const server = createServer(handler)
+  const server = createServer((req, res) => {
+    const asPath = req.url.replace(/[?#].*$/, '')
+    if (/\/page\/\d+/.test(asPath)) {
+      fs.createReadStream('./out/index.html').pipe(res)
+    } else if (/\/_next/.test(asPath)) {
+      fs.createReadStream(path.join('./out', asPath)).pipe(res)
+    } else if (/\/_static/.test(asPath)) {
+      fs.createReadStream(path.join('./', asPath)).pipe(res)
+    } else {
+      res.end('404')
+    }
+  })
   // websocket server
   const io = require('socket.io')(server)
 
