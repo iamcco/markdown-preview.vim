@@ -49,7 +49,10 @@ export default class PreviewPage extends React.Component {
     })
 
     // katex
-    this.md.use(mk)
+    this.md.use(mk, {
+      'throwOnError': false,
+      'errorColor': ' #cc0000'
+    })
   }
 
   componentDidMount () {
