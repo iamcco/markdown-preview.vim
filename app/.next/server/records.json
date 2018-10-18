@@ -7,17 +7,18 @@
       "external \"socket.io-client\"": 3,
       "external \"markdown-it\"": 4,
       "external \"markdown-it-katex\"": 5,
-      "multi ./pages/index.jsx": 6,
-      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 7,
-      "multi ../node_modules/next/dist/pages/_app.js": 8,
-      "../node_modules/next/dist/pages/_app.js": 9,
-      "external \"next/app\"": 10,
-      "multi ../node_modules/next/dist/pages/_error.js": 11,
-      "../node_modules/next/dist/pages/_error.js": 12,
-      "external \"next/error\"": 13,
-      "multi ../node_modules/next/dist/pages/_document.js": 14,
-      "../node_modules/next/dist/pages/_document.js": 15,
-      "external \"next/document\"": 16
+      "external \"markdown-it-plantuml\"": 6,
+      "multi ./pages/index.jsx": 7,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 8,
+      "multi ../node_modules/next/dist/pages/_app.js": 9,
+      "../node_modules/next/dist/pages/_app.js": 10,
+      "external \"next/app\"": 11,
+      "multi ../node_modules/next/dist/pages/_error.js": 12,
+      "../node_modules/next/dist/pages/_error.js": 13,
+      "external \"next/error\"": 14,
+      "multi ../node_modules/next/dist/pages/_document.js": 15,
+      "../node_modules/next/dist/pages/_document.js": 16,
+      "external \"next/document\"": 17
     },
     "usedIds": {
       "0": 0,
@@ -36,15 +37,16 @@
       "13": 13,
       "14": 14,
       "15": 15,
-      "16": 16
+      "16": 16,
+      "17": 17
     }
   },
   "chunks": {
     "byName": {
-      "static/hJdvGn8COPP0Ao_livKDz/pages/index.js": 0,
-      "static/hJdvGn8COPP0Ao_livKDz/pages/_app.js": 1,
-      "static/hJdvGn8COPP0Ao_livKDz/pages/_error.js": 2,
-      "static/hJdvGn8COPP0Ao_livKDz/pages/_document.js": 3
+      "static/SMTcULR1H041LKFnzAdVl/pages/index.js": 0,
+      "static/SMTcULR1H041LKFnzAdVl/pages/_app.js": 1,
+      "static/SMTcULR1H041LKFnzAdVl/pages/_error.js": 2,
+      "static/SMTcULR1H041LKFnzAdVl/pages/_document.js": 3
     },
     "bySource": {},
     "usedIds": [

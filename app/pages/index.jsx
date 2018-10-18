@@ -4,6 +4,7 @@ import io from 'socket.io-client'
 import MarkdownIt from 'markdown-it'
 import mk from 'markdown-it-katex'
 import hljs from 'highlight.js'
+import mkuml from 'markdown-it-plantuml'
 
 export default class PreviewPage extends React.Component {
   constructor (props) {
@@ -49,10 +50,15 @@ export default class PreviewPage extends React.Component {
     })
 
     // katex
-    this.md.use(mk, {
-      'throwOnError': false,
-      'errorColor': ' #cc0000'
-    })
+    this.md
+      .use(mk, {
+        'throwOnError': false,
+        'errorColor': ' #cc0000'
+      })
+      .use(mkuml, {
+        imageFormat: 'png',
+        server: '/_uml'
+      })
   }
 
   componentDidMount () {
