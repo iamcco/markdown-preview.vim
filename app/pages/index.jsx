@@ -93,8 +93,7 @@ export default class PreviewPage extends React.Component {
           <title>preview page</title>
           <link rel="stylesheet" href="/_static/markdown.css" />
           <link rel="stylesheet" href="/_static/highlight.css" />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css" />
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css" />
+          <link rel="stylesheet" href="/_static/katex@0.5.1.css" />
         </Head>
         <section
           className="markdown-body"

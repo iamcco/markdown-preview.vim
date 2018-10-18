@@ -227,7 +227,10 @@ function (_React$Component) {
       }
     }); // katex
 
-    _this.md.use(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default.a);
+    _this.md.use(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      'throwOnError': false,
+      'errorColor': ' #cc0000'
+    });
 
     return _this;
   }
@@ -275,10 +278,7 @@ function (_React$Component) {
         href: "/_static/highlight.css"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
         rel: "stylesheet",
-        href: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css"
+        href: "/_static/katex@0.5.1.css"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "markdown-body",
         dangerouslySetInnerHTML: {

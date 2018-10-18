@@ -47,7 +47,7 @@
       "publicPath": "static/chunks/commons.5e0892c80a77120db850.js"
     }
   ],
-  "./../../../webpack/buildin/global.js": [
+  "./../../webpack/buildin/global.js": [
     {
       "id": 7,
       "name": "../node_modules/webpack/buildin/global.js",
