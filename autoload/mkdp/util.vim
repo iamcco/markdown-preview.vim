@@ -41,7 +41,7 @@ endfunction
 
 " open browser
 function! mkdp#util#open_browser() abort
-  call system('open -a Google\ Chrome "http://localhost:8081/page/' . bufnr('%') . '"')
+  call mkdp#rpc#open_browser()
   call mkdp#autocmd#init()
 endfunction
 

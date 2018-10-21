@@ -21,6 +21,7 @@
     "next": "^7.0.2",
     "next-routes": "^1.4.2",
     "node-plantuml": "^0.7.0",
+    "opener": "^1.5.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "socket.io": "^2.1.1",

@@ -1,5 +1,5 @@
 const attach = require('../lib/attach').default
-const logger = require('../lib/util/logger')('server')
+const logger = require('../lib/util/logger')('app/nvim')
 const address = process.env.NVIM_LISTEN_ADDRESS || '/tmp/nvim'
 
 const MSG_PREFIX = '[markdown-preview.vim]'
@@ -18,7 +18,7 @@ process.on('uncaughtException', function (err) {
 
 process.on('unhandledRejection', function (reason, p) {
   if (plugin.nvim) {
-    plugin.nvim.call('mkdp#util#echo_messages', ['Error', `${MSG_PREFIX} UnhandledRejection`])
+    plugin.nvim.call('mkdp#util#echo_messages', ['Error', [`${MSG_PREFIX} UnhandledRejection`, `${reason}`]])
   }
   logger.error('unhandledRejection ', p, reason)
 })

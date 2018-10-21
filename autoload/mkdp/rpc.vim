@@ -45,10 +45,14 @@ function! mkdp#rpc#get_server_status() abort
 endfunction
 
 function! mkdp#rpc#preview_refresh() abort
-  call rpcnotify(g:mkdp_node_channel_id, 'refresh_content')
+  call rpcnotify(g:mkdp_node_channel_id, 'refresh_content', { 'bufnr': bufnr('%') })
 endfunction
 
 function! mkdp#rpc#preview_close() abort
-  call rpcnotify(g:mkdp_node_channel_id, 'preview_close')
+  call rpcnotify(g:mkdp_node_channel_id, 'close_page', { 'bufnr': bufnr('%') })
+endfunction
+
+function! mkdp#rpc#open_browser() abort
+  call rpcnotify(g:mkdp_node_channel_id, 'open_browser', { 'bufnr': bufnr('%') })
 endfunction
 

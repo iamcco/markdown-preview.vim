@@ -3,7 +3,8 @@ module.exports = {
   pageExtensions: [ 'jsx' ],
   exportPathMap: async function () {
     return {
-      '/': { page: '/' }
+      '/': { page: '/' },
+      '/404.html': { page: '/404' }
     }
   }
 }

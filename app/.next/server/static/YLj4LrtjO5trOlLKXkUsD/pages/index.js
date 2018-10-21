@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -134,14 +134,16 @@ module.exports = require("markdown-it-katex");
 module.exports = require("markdown-it-plantuml");
 
 /***/ }),
-/* 7 */
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(8);
+module.exports = __webpack_require__(10);
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -162,6 +164,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6);
 /* harmony import */ var markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -186,6 +192,49 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var DEFAULT_OPTIONS = {
+  mkit: {
+    // Enable HTML tags in source
+    html: true,
+    // Use '/' to close single tags (<br />).
+    // This is only for full CommonMark compatibility.
+    xhtmlOut: true,
+    // Convert '\n' in paragraphs into <br>
+    breaks: false,
+    // CSS language prefix for fenced blocks. Can be
+    // useful for external highlighters.
+    langPrefix: 'language-',
+    // Autoconvert URL-like text to links
+    linkify: true,
+    // Enable some language-neutral replacement + quotes beautification
+    typographer: true,
+    // Double + single quotes replacement pairs, when typographer enabled,
+    // and smartquotes on. Could be either a String or an Array.
+    //
+    // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+    // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+    quotes: '“”‘’',
+    // Highlighter function. Should return escaped HTML,
+    // or '' if the source string is not changed and should be escaped externally.
+    // If result starts with <pre... internal wrapper is skipped.
+    highlight: function highlight(str, lang) {
+      if (lang && highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.getLanguage(lang)) {
+        try {
+          return highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.highlight(lang, str).value;
+        } catch (__) {}
+      }
+
+      return ''; // use external default escaping
+    }
+  },
+  katex: {
+    'throwOnError': false,
+    'errorColor': ' #cc0000'
+  },
+  uml: {
+    useLocal: true
+  }
+};
 
 var PreviewPage =
 /*#__PURE__*/
@@ -199,83 +248,72 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PreviewPage).call(this, props));
     _this.state = {
+      cursor: '',
       content: ''
     };
-    _this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_3___default.a({
-      // Enable HTML tags in source
-      html: true,
-      // Use '/' to close single tags (<br />).
-      // This is only for full CommonMark compatibility.
-      xhtmlOut: true,
-      // Convert '\n' in paragraphs into <br>
-      breaks: false,
-      // CSS language prefix for fenced blocks. Can be
-      // useful for external highlighters.
-      langPrefix: 'language-',
-      // Autoconvert URL-like text to links
-      linkify: true,
-      // Enable some language-neutral replacement + quotes beautification
-      typographer: true,
-      // Double + single quotes replacement pairs, when typographer enabled,
-      // and smartquotes on. Could be either a String or an Array.
-      //
-      // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-      // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-      quotes: '“”‘’',
-      // Highlighter function. Should return escaped HTML,
-      // or '' if the source string is not changed and should be escaped externally.
-      // If result starts with <pre... internal wrapper is skipped.
-      highlight: function highlight(str, lang) {
-        if (lang && highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.getLanguage(lang)) {
-          try {
-            return highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.highlight(lang, str).value;
-          } catch (__) {}
-        }
-
-        return ''; // use external default escaping
-      }
-    }); // katex
-
-    _this.md.use(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default.a, {
-      'throwOnError': false,
-      'errorColor': ' #cc0000'
-    }).use(markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6___default.a, {
-      imageFormat: 'png',
-      server: '/_uml'
-    });
-
     return _this;
   }
 
   _createClass(PreviewPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()({
         query: {
           bufnr: window.location.pathname.split('/')[2]
         }
       });
       window.socket = socket;
-      socket.on('refresh_content', function (_ref) {
-        var cursor = _ref.cursor,
-            content = _ref.content;
-        console.log('refresh: ', cursor, content);
+      socket.on('connect', this.onConnect.bind(this));
+      socket.on('disconnect', this.onDisconnect.bind(this));
+      socket.on('close', this.onClose.bind(this));
+      socket.on('refresh_content', this.onRefreshContent.bind(this));
+      socket.on('close_page', this.onClose.bind(this));
+    }
+  }, {
+    key: "onConnect",
+    value: function onConnect() {
+      console.log('connect success');
+    }
+  }, {
+    key: "onDisconnect",
+    value: function onDisconnect() {
+      console.log('disconnect');
+    }
+  }, {
+    key: "onClose",
+    value: function onClose() {
+      console.log('close');
+      window.close();
+    }
+  }, {
+    key: "onRefreshContent",
+    value: function onRefreshContent(_ref) {
+      var _ref$options = _ref.options,
+          options = _ref$options === void 0 ? {} : _ref$options,
+          cursor = _ref.cursor,
+          content = _ref.content;
+      console.log('refresh: ', options, cursor, content);
 
-        _this2.setState({
-          cursor: cursor,
-          content: _this2.md.render(content.join('\n'))
-        });
-      });
-      socket.on('connect', function () {
-        console.log('connect success');
-      });
-      socket.on('disconnect', function () {
-        console.log('disconnect');
-      });
-      socket.on('close', function () {
-        window.close();
+      if (!this.md) {
+        var _options$mkit = options.mkit,
+            mkit = _options$mkit === void 0 ? {} : _options$mkit,
+            _options$katex = options.katex,
+            katex = _options$katex === void 0 ? {} : _options$katex,
+            _options$uml = options.uml,
+            uml = _options$uml === void 0 ? {} : _options$uml; // markdown-it
+
+        this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_3___default.a(_objectSpread({}, DEFAULT_OPTIONS.mkit, mkit)); // katex
+
+        this.md.use(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default.a, _objectSpread({}, DEFAULT_OPTIONS.katex, katex)).use(markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6___default.a, _objectSpread({
+          imageFormat: 'png'
+        }, uml.useLocal || DEFAULT_OPTIONS.uml.useLocal ? {
+          server: '/_uml'
+        } : {}));
+      }
+
+      this.setState({
+        cursor: cursor,
+        content: this.md.render(content.join('\n'))
       });
     }
   }, {

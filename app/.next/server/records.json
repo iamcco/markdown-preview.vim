@@ -8,17 +8,19 @@
       "external \"markdown-it\"": 4,
       "external \"markdown-it-katex\"": 5,
       "external \"markdown-it-plantuml\"": 6,
-      "multi ./pages/index.jsx": 7,
-      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 8,
-      "multi ../node_modules/next/dist/pages/_app.js": 9,
-      "../node_modules/next/dist/pages/_app.js": 10,
-      "external \"next/app\"": 11,
-      "multi ../node_modules/next/dist/pages/_error.js": 12,
-      "../node_modules/next/dist/pages/_error.js": 13,
-      "external \"next/error\"": 14,
-      "multi ../node_modules/next/dist/pages/_document.js": 15,
-      "../node_modules/next/dist/pages/_document.js": 16,
-      "external \"next/document\"": 17
+      "multi ./pages/404.jsx": 7,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/404.jsx": 8,
+      "multi ./pages/index.jsx": 9,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 10,
+      "multi ../node_modules/next/dist/pages/_app.js": 11,
+      "../node_modules/next/dist/pages/_app.js": 12,
+      "external \"next/app\"": 13,
+      "multi ../node_modules/next/dist/pages/_error.js": 14,
+      "../node_modules/next/dist/pages/_error.js": 15,
+      "external \"next/error\"": 16,
+      "multi ../node_modules/next/dist/pages/_document.js": 17,
+      "../node_modules/next/dist/pages/_document.js": 18,
+      "external \"next/document\"": 19
     },
     "usedIds": {
       "0": 0,
@@ -38,22 +40,26 @@
       "14": 14,
       "15": 15,
       "16": 16,
-      "17": 17
+      "17": 17,
+      "18": 18,
+      "19": 19
     }
   },
   "chunks": {
     "byName": {
-      "static/SMTcULR1H041LKFnzAdVl/pages/index.js": 0,
-      "static/SMTcULR1H041LKFnzAdVl/pages/_app.js": 1,
-      "static/SMTcULR1H041LKFnzAdVl/pages/_error.js": 2,
-      "static/SMTcULR1H041LKFnzAdVl/pages/_document.js": 3
+      "static/YLj4LrtjO5trOlLKXkUsD/pages/404.js": 0,
+      "static/YLj4LrtjO5trOlLKXkUsD/pages/index.js": 1,
+      "static/YLj4LrtjO5trOlLKXkUsD/pages/_app.js": 2,
+      "static/YLj4LrtjO5trOlLKXkUsD/pages/_error.js": 3,
+      "static/YLj4LrtjO5trOlLKXkUsD/pages/_document.js": 4
     },
     "bySource": {},
     "usedIds": [
       0,
       1,
       2,
-      3
+      3,
+      4
     ]
   }
 }

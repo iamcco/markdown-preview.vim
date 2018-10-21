@@ -10,6 +10,16 @@ interface IApp {
       data: any
     }
   ) => void)
+  closePage: ((
+    params: {
+      bufnr: number | string
+    }
+  ) => void)
+  openBrowser: ((
+    params: {
+      bufnr: number | string
+    }
+  ) => void)
 }
 
 interface IPlugin {
@@ -22,10 +32,12 @@ let app: IApp
 export default function(options: Attach): IPlugin {
   const nvim: NeovimClient = attach(options)
 
-  nvim.on('notification', async (method: string) => {
+  nvim.on('notification', async (method: string, args: any[]) => {
+    const opts = args[0]
+    const bufnr = opts.bufnr
+    const buffers = await nvim.buffers
+    const buffer = buffers.find(b => b.id === bufnr)
     if (method === 'refresh_content') {
-      const buffer = await nvim.buffer
-      const bufnr = buffer.id
       const cursor = await nvim.call('getpos', '.')
       const content = await buffer.getLines()
       app.refreshPage({
@@ -35,6 +47,14 @@ export default function(options: Attach): IPlugin {
           content
         }
       })
+    } else if (method === 'close_page') {
+      app.closePage({
+        bufnr
+      })
+    } else if (method === 'open_browser') {
+      app.openBrowser({
+        bufnr
+      })
     }
   })
 
@@ -43,7 +63,7 @@ export default function(options: Attach): IPlugin {
       await nvim.setVar('mkdp_node_channel_id', channelId)
     })
     .catch(e => {
-      logger.error(e)
+      logger.error('channelId: ', e)
     })
 
   return {

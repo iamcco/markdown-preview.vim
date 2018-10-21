@@ -5,6 +5,12 @@ interface IApp {
         bufnr: number | string;
         data: any;
     }) => void);
+    closePage: ((params: {
+        bufnr: number | string;
+    }) => void);
+    openBrowser: ((params: {
+        bufnr: number | string;
+    }) => void);
 }
 interface IPlugin {
     init: ((app: IApp) => void);

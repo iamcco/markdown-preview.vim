@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const plantuml = require('node-plantuml')
 
-// TODO: optoin
-plantuml.useNailgun() // Activate the usage of Nailgun
+// need java dependent
+// plantuml.useNailgun() // Activate the usage of Nailgun
 
 const routes = []
 
@@ -51,6 +51,12 @@ use((req, res, next) => {
     return gen.out.pipe(res)
   }
   next()
+})
+
+// 404
+use((req, res) => {
+  res.statusCode = 404
+  return fs.createReadStream(path.join('./out', '404.html')).pipe(res)
 })
 
 module.exports = function (req, res, next) {

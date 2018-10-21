@@ -44,6 +44,18 @@ if !exists('g:mkdp_open_to_the_world')
   let g:mkdp_open_to_the_world = 0
 endif
 
+if !exists('g:mkdp_preview_options')
+  let g:mkdp_preview_options = {
+      \ 'mkit': {},
+      \ 'katex': {},
+      \ 'uml': {}
+      \ }
+endif
+
+if !exists('g:mkdp_port')
+  let g:mkdp_port = ''
+endif
+
 function! s:init_command() abort
   " mapping for user
   map <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()<CR>
