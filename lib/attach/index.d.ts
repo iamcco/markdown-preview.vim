@@ -8,6 +8,7 @@ interface IApp {
     closePage: ((params: {
         bufnr: number | string;
     }) => void);
+    closeAllPages: (() => void);
     openBrowser: ((params: {
         bufnr: number | string;
     }) => void);

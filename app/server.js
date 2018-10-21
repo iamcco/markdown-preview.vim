@@ -11,7 +11,7 @@ const logger = require('../lib/util/logger')('app/server')
 
 const routes = require('./routes')
 
-const clients = {}
+let clients = {}
 
 // http server
 const server = http.createServer((req, res) => {
@@ -79,6 +79,17 @@ async function startServer () {
         return true
       })
     }
+    function closeAllPages () {
+      logger.info('close all pages')
+      Object.keys(clients).forEach(bufnr => {
+        ;(clients[bufnr] || []).forEach(c => {
+          if (c.connected) {
+            c.emit('close_page')
+          }
+        })
+      })
+      clients = {}
+    }
     function openBrowser ({ bufnr }) {
       const url = `http://localhost:${port}/page/${bufnr}`
       logger.info('open page: ', url)
@@ -87,6 +98,7 @@ async function startServer () {
     plugin.init({
       refreshPage,
       closePage,
+      closeAllPages,
       openBrowser
     })
 

@@ -15,6 +15,7 @@ interface IApp {
       bufnr: number | string
     }
   ) => void)
+  closeAllPages: (() => void)
   openBrowser: ((
     params: {
       bufnr: number | string
@@ -56,6 +57,13 @@ export default function(options: Attach): IPlugin {
         bufnr
       })
     }
+  })
+
+  nvim.on('request', async (method: string, args: any, resp: any) => {
+    if (method === 'close_all_pages') {
+      app.closeAllPages()
+    }
+    resp.send()
   })
 
   nvim.channelId

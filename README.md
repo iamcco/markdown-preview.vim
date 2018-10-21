@@ -2,15 +2,23 @@
 
 ## todo
 
-- markdown render: markdown-it
+- [x] markdown render: markdown-it
+- [x] markdown highlisht
+- [x] markdown css
+- [x] math katex
+- [x] plantuml
+- [x] markdown-it option
+- [x] katex option
+- [x] plantuml option
 - markdown style option
-- markdown css
-- markdown highlisht
-- math katex
+- highlisht style option
+- vim support
+- binary support
+- sync scroll
 - task list
 - meoji
-- plantuml
-- sync scroll
+- cross platform test (mac/linux/windows)
+- ...
 
 # UML example:
 

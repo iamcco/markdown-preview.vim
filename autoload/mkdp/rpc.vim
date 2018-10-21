@@ -16,10 +16,11 @@ endfunction
 
 function! mkdp#rpc#stop_server() abort
   if s:mkdp_channel_id !=# -1
+    call rpcrequest(g:mkdp_node_channel_id, 'close_all_pages')
     call jobstop(s:mkdp_channel_id)
   endif
   let s:mkdp_channel_id = -1
-  let mkdp_node_channel_id = -1
+  let g:mkdp_node_channel_id = -1
 endfunction
 
 function! mkdp#rpc#get_server_status() abort
@@ -32,14 +33,20 @@ function! mkdp#rpc#get_server_status() abort
 endfunction
 
 function! mkdp#rpc#preview_refresh() abort
-  call rpcnotify(g:mkdp_node_channel_id, 'refresh_content', { 'bufnr': bufnr('%') })
+  if exists('g:mkdp_node_channel_id') && g:mkdp_node_channel_id !=# -1
+    call rpcnotify(g:mkdp_node_channel_id, 'refresh_content', { 'bufnr': bufnr('%') })
+  endif
 endfunction
 
 function! mkdp#rpc#preview_close() abort
-  call rpcnotify(g:mkdp_node_channel_id, 'close_page', { 'bufnr': bufnr('%') })
+  if exists('g:mkdp_node_channel_id') && g:mkdp_node_channel_id !=# -1
+    call rpcnotify(g:mkdp_node_channel_id, 'close_page', { 'bufnr': bufnr('%') })
+  endif
 endfunction
 
 function! mkdp#rpc#open_browser() abort
-  call rpcnotify(g:mkdp_node_channel_id, 'open_browser', { 'bufnr': bufnr('%') })
+  if exists('g:mkdp_node_channel_id') && g:mkdp_node_channel_id !=# -1
+    call rpcnotify(g:mkdp_node_channel_id, 'open_browser', { 'bufnr': bufnr('%') })
+  endif
 endfunction
 

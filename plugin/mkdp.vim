@@ -1,13 +1,13 @@
 " path to the chrome or the command to open chrome(or other modern browsers)
 " if set, g:mkdp_browserfunc would be ignored
-if !exists('g:mkdp_path_to_chrome')
-  let g:mkdp_path_to_chrome = ""
-endif
+"if !exists('g:mkdp_path_to_chrome')
+  "let g:mkdp_path_to_chrome = ""
+"endif
 
 " callback vim function to open browser, the only param is the url to open
-if !exists('g:mkdp_browserfunc')
-  let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
-endif
+"if !exists('g:mkdp_browserfunc')
+  "let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+"endif
 
 " set to 1, the vim will open the preview window once enter the markdown
 " buffer
@@ -60,6 +60,8 @@ function! s:init_command() abort
   " mapping for user
   map <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()<CR>
   imap <buffer> <silent> <Plug>MarkdownPreview <Esc>:call mkdp#util#open_preview_page()<CR>a
+  map <buffer> <silent> <Plug>MarkdownPreviewStop :call mkdp#util#stop_preview()<CR>
+  imap <buffer> <silent> <Plug>MarkdownPreviewStop <Esc>:call mkdp#util#stop_preview()<CR>a
 endfunction
 
 function! s:init() abort
