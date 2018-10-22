@@ -52,6 +52,16 @@ if !exists('g:mkdp_preview_options')
       \ }
 endif
 
+" markdown css file absolute path
+if !exists('g:mkdp_markdown_css')
+  let g:mkdp_markdown_css = ''
+endif
+
+" highlight css file absolute path
+if !exists('g:mkdp_highlight_css')
+  let g:mkdp_highlight_css = ''
+endif
+
 if !exists('g:mkdp_port')
   let g:mkdp_port = ''
 endif

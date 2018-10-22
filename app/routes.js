@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const plantuml = require('node-plantuml')
+const logger = require('../lib/util/logger')('app/routes')
 
 // need java dependent
 // plantuml.useNailgun() // Activate the usage of Nailgun
@@ -23,6 +24,21 @@ use((req, res, next) => {
 use((req, res, next) => {
   if (/\/_next/.test(req.asPath)) {
     return fs.createReadStream(path.join('./out', req.asPath)).pipe(res)
+  }
+  next()
+})
+
+// /_static/markdown.css
+// /_static/highlight.css
+use((req, res, next) => {
+  try {
+    if (req.mkcss && req.asPath === '/_static/markdown.css') {
+      return fs.createReadStream(req.mkcss).pipe(res)
+    } else if (req.hicss && req.asPath === '/_static/highlight.css') {
+      return fs.createReadStream(req.hicss).pipe(res)
+    }
+  } catch (e) {
+    logger.error('load diy css fail: ', req.asPath, req.mkcss, req.hicss)
   }
   next()
 })

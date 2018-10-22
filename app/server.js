@@ -14,9 +14,11 @@ const routes = require('./routes')
 let clients = {}
 
 // http server
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   // request path
   req.asPath = req.url.replace(/[?#].*$/, '')
+  req.mkcss = await plugin.nvim.getVar('mkdp_markdown_css')
+  req.hicss = await plugin.nvim.getVar('mkdp_highlight_css')
   // routes
   routes(req, res)
 })

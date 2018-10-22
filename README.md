@@ -3,15 +3,15 @@
 ## todo
 
 - [x] markdown render: markdown-it
-- [x] markdown highlisht
+- [x] markdown highlight
 - [x] markdown css
 - [x] math katex
 - [x] plantuml
 - [x] markdown-it option
 - [x] katex option
 - [x] plantuml option
-- markdown style option
-- highlisht style option
+- [x] markdown style option
+- [x] highlight style option
 - vim support
 - binary support
 - sync scroll
