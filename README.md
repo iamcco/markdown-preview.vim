@@ -13,6 +13,8 @@
 - [x] markdown style option
 - [x] highlight style option
 - [x] sync scroll
+- preview page title use the document's name
+- favicon.ico
 - vim support
 - binary support
 - task list
