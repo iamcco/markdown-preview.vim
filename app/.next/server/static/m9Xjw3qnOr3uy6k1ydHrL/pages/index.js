@@ -139,30 +139,82 @@ module.exports = require("markdown-it-plantuml");
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(10);
+module.exports = __webpack_require__(19);
 
 
 /***/ }),
-/* 10 */
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PreviewPage; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var markdown_it__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
-/* harmony import */ var markdown_it__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(markdown_it__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var markdown_it_katex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
-/* harmony import */ var markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1);
-/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(highlight_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6);
-/* harmony import */ var markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6__);
+
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(0);
+var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
+
+// EXTERNAL MODULE: external "next/head"
+var head_ = __webpack_require__(2);
+var head_default = /*#__PURE__*/__webpack_require__.n(head_);
+
+// EXTERNAL MODULE: external "socket.io-client"
+var external_socket_io_client_ = __webpack_require__(3);
+var external_socket_io_client_default = /*#__PURE__*/__webpack_require__.n(external_socket_io_client_);
+
+// EXTERNAL MODULE: external "markdown-it"
+var external_markdown_it_ = __webpack_require__(4);
+var external_markdown_it_default = /*#__PURE__*/__webpack_require__.n(external_markdown_it_);
+
+// EXTERNAL MODULE: external "markdown-it-katex"
+var external_markdown_it_katex_ = __webpack_require__(5);
+var external_markdown_it_katex_default = /*#__PURE__*/__webpack_require__.n(external_markdown_it_katex_);
+
+// EXTERNAL MODULE: external "highlight.js"
+var external_highlight_js_ = __webpack_require__(1);
+var external_highlight_js_default = /*#__PURE__*/__webpack_require__.n(external_highlight_js_);
+
+// EXTERNAL MODULE: external "markdown-it-plantuml"
+var external_markdown_it_plantuml_ = __webpack_require__(6);
+var external_markdown_it_plantuml_default = /*#__PURE__*/__webpack_require__.n(external_markdown_it_plantuml_);
+
+// CONCATENATED MODULE: ./pages/linenumbers.js
+/*
+ * https://github.com/digitalmoksha/markdown-it-inject-linenumbers/blob/master/index.js
+*/
+function injectLinenumbersPlugin(md) {
+  //
+  // Inject line numbers for sync scroll. Notes:
+  //
+  // - We track only headings and paragraphs, at any level.
+  // - TODO Footnotes content causes jumps. Level limit filters it automatically.
+  function injectLineNumbers(tokens, idx, options, env, slf) {
+    var line; // if (tokens[idx].map && tokens[idx].level === 0) {
+
+    if (tokens[idx].map) {
+      line = tokens[idx].map[0];
+      tokens[idx].attrJoin('class', 'source-line');
+      tokens[idx].attrSet('data-source-line', String(line));
+    }
+
+    return slf.renderToken(tokens, idx, options, env, slf);
+  }
+
+  md.renderer.rules.paragraph_open = injectLineNumbers;
+  md.renderer.rules.heading_open = injectLineNumbers;
+  md.renderer.rules.list_item_open = injectLineNumbers;
+  md.renderer.rules.table_open = injectLineNumbers;
+}
+// CONCATENATED MODULE: ./pages/index.jsx
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return pages_PreviewPage; });
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -184,6 +236,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -218,9 +271,9 @@ var DEFAULT_OPTIONS = {
     // or '' if the source string is not changed and should be escaped externally.
     // If result starts with <pre... internal wrapper is skipped.
     highlight: function highlight(str, lang) {
-      if (lang && highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.getLanguage(lang)) {
+      if (lang && external_highlight_js_default.a.getLanguage(lang)) {
         try {
-          return highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.highlight(lang, str).value;
+          return external_highlight_js_default.a.highlight(lang, str).value;
         } catch (__) {}
       }
 
@@ -236,7 +289,7 @@ var DEFAULT_OPTIONS = {
   }
 };
 
-var PreviewPage =
+var pages_PreviewPage =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(PreviewPage, _React$Component);
@@ -257,7 +310,7 @@ function (_React$Component) {
   _createClass(PreviewPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()({
+      var socket = external_socket_io_client_default()({
         query: {
           bufnr: window.location.pathname.split('/')[2]
         }
@@ -292,7 +345,6 @@ function (_React$Component) {
           options = _ref$options === void 0 ? {} : _ref$options,
           cursor = _ref.cursor,
           content = _ref.content;
-      console.log('refresh: ', options, cursor, content);
 
       if (!this.md) {
         var _options$mkit = options.mkit,
@@ -302,34 +354,55 @@ function (_React$Component) {
             _options$uml = options.uml,
             uml = _options$uml === void 0 ? {} : _options$uml; // markdown-it
 
-        this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_3___default.a(_objectSpread({}, DEFAULT_OPTIONS.mkit, mkit)); // katex
+        this.md = new external_markdown_it_default.a(_objectSpread({}, DEFAULT_OPTIONS.mkit, mkit)); // katex
 
-        this.md.use(markdown_it_katex__WEBPACK_IMPORTED_MODULE_4___default.a, _objectSpread({}, DEFAULT_OPTIONS.katex, katex)).use(markdown_it_plantuml__WEBPACK_IMPORTED_MODULE_6___default.a, _objectSpread({
+        this.md.use(external_markdown_it_katex_default.a, _objectSpread({}, DEFAULT_OPTIONS.katex, katex)).use(external_markdown_it_plantuml_default.a, _objectSpread({
           imageFormat: 'png'
         }, uml.useLocal || DEFAULT_OPTIONS.uml.useLocal ? {
           server: '/_uml'
-        } : {}));
+        } : {})).use(injectLinenumbersPlugin);
       }
 
       this.setState({
         cursor: cursor,
         content: this.md.render(content.join('\n'))
+      }, function () {
+        var line = cursor[1];
+        var lineEle = document.querySelector("[data-source-line=\"".concat(line - 1, "\"]"));
+
+        if (lineEle) {
+          // eslint-disable-next-line
+          TweenLite.to(document.body, 0.4, {
+            scrollTop: lineEle.offsetTop - 100,
+            ease: Power2.easeOut // eslint-disable-line
+
+          }); // eslint-disable-next-line
+
+          TweenLite.to(document.documentElement, 0.4, {
+            scrollTop: lineEle.offsetTop - 100,
+            ease: Power2.easeOut // eslint-disable-line
+
+          });
+        }
       });
     }
   }, {
     key: "render",
     value: function render() {
       var content = this.state.content;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "preview page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
+      return external_react_default.a.createElement(external_react_default.a.Fragment, null, external_react_default.a.createElement(head_default.a, null, external_react_default.a.createElement("title", null, "preview page"), external_react_default.a.createElement("link", {
         rel: "stylesheet",
         href: "/_static/markdown.css"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
+      }), external_react_default.a.createElement("link", {
         rel: "stylesheet",
         href: "/_static/highlight.css"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
+      }), external_react_default.a.createElement("link", {
         rel: "stylesheet",
         href: "/_static/katex@0.5.1.css"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      }), external_react_default.a.createElement("script", {
+        type: "text/javascript",
+        src: "/_static/tweenlite.min.js"
+      })), external_react_default.a.createElement("section", {
         className: "markdown-body",
         dangerouslySetInnerHTML: {
           __html: content
@@ -339,7 +412,7 @@ function (_React$Component) {
   }]);
 
   return PreviewPage;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(external_react_default.a.Component);
 
 
 

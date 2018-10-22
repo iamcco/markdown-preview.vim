@@ -88,31 +88,31 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 14:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(15);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
 
-/***/ 15:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16)
+module.exports = __webpack_require__(12)
 
 
 /***/ }),
 
-/***/ 16:
+/***/ 12:
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+module.exports = require("next/app");
 
 /***/ })
 

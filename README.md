@@ -12,9 +12,9 @@
 - [x] plantuml option
 - [x] markdown style option
 - [x] highlight style option
+- [x] sync scroll
 - vim support
 - binary support
-- sync scroll
 - task list
 - meoji
 - cross platform test (mac/linux/windows)

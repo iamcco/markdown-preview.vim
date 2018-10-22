@@ -11,16 +11,16 @@
       "multi ./pages/404.jsx": 7,
       "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/404.jsx": 8,
       "multi ./pages/index.jsx": 9,
-      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx": 10,
-      "multi ../node_modules/next/dist/pages/_app.js": 11,
-      "../node_modules/next/dist/pages/_app.js": 12,
-      "external \"next/app\"": 13,
-      "multi ../node_modules/next/dist/pages/_error.js": 14,
-      "../node_modules/next/dist/pages/_error.js": 15,
-      "external \"next/error\"": 16,
-      "multi ../node_modules/next/dist/pages/_document.js": 17,
-      "../node_modules/next/dist/pages/_document.js": 18,
-      "external \"next/document\"": 19
+      "multi ../node_modules/next/dist/pages/_app.js": 10,
+      "../node_modules/next/dist/pages/_app.js": 11,
+      "external \"next/app\"": 12,
+      "multi ../node_modules/next/dist/pages/_error.js": 13,
+      "../node_modules/next/dist/pages/_error.js": 14,
+      "external \"next/error\"": 15,
+      "multi ../node_modules/next/dist/pages/_document.js": 16,
+      "../node_modules/next/dist/pages/_document.js": 17,
+      "external \"next/document\"": 18,
+      "../node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/index.jsx e6a44f613882c6b423502aa360d1f7e2": 19
     },
     "usedIds": {
       "0": 0,
@@ -47,11 +47,11 @@
   },
   "chunks": {
     "byName": {
-      "static/SeCkmGRR5raBKH6cfbSnP/pages/404.js": 0,
-      "static/SeCkmGRR5raBKH6cfbSnP/pages/index.js": 1,
-      "static/SeCkmGRR5raBKH6cfbSnP/pages/_app.js": 2,
-      "static/SeCkmGRR5raBKH6cfbSnP/pages/_error.js": 3,
-      "static/SeCkmGRR5raBKH6cfbSnP/pages/_document.js": 4
+      "static/m9Xjw3qnOr3uy6k1ydHrL/pages/404.js": 0,
+      "static/m9Xjw3qnOr3uy6k1ydHrL/pages/index.js": 1,
+      "static/m9Xjw3qnOr3uy6k1ydHrL/pages/_app.js": 2,
+      "static/m9Xjw3qnOr3uy6k1ydHrL/pages/_error.js": 3,
+      "static/m9Xjw3qnOr3uy6k1ydHrL/pages/_document.js": 4
     },
     "bySource": {},
     "usedIds": [

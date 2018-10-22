@@ -33,9 +33,13 @@ use((req, res, next) => {
 use((req, res, next) => {
   try {
     if (req.mkcss && req.asPath === '/_static/markdown.css') {
-      return fs.createReadStream(req.mkcss).pipe(res)
+      if (fs.existsSync(req.mkcss)) {
+        return fs.createReadStream(req.mkcss).pipe(res)
+      }
     } else if (req.hicss && req.asPath === '/_static/highlight.css') {
-      return fs.createReadStream(req.hicss).pipe(res)
+      if (fs.existsSync(req.hicss)) {
+        return fs.createReadStream(req.hicss).pipe(res)
+      }
     }
   } catch (e) {
     logger.error('load diy css fail: ', req.asPath, req.mkcss, req.hicss)

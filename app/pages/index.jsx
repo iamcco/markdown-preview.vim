@@ -5,6 +5,7 @@ import MarkdownIt from 'markdown-it'
 import mk from 'markdown-it-katex'
 import hljs from 'highlight.js'
 import mkuml from 'markdown-it-plantuml'
+import linenumbers from './linenumbers'
 
 const DEFAULT_OPTIONS = {
   mkit: {
@@ -94,7 +95,6 @@ export default class PreviewPage extends React.Component {
   }
 
   onRefreshContent ({ options = {}, cursor, content }) {
-    console.log('refresh: ', options, cursor, content)
     if (!this.md) {
       const { mkit = {}, katex = {}, uml = {} } = options
       // markdown-it
@@ -112,10 +112,34 @@ export default class PreviewPage extends React.Component {
           imageFormat: 'png',
           ...((uml.useLocal || DEFAULT_OPTIONS.uml.useLocal) ? ({ server: '/_uml' }) : {})
         })
+        .use(linenumbers)
     }
     this.setState({
       cursor,
       content: this.md.render(content.join('\n'))
+    }, () => {
+      const line = cursor[1]
+      const lineEle = document.querySelector(`[data-source-line="${line - 1}"]`)
+      if (lineEle) {
+        // eslint-disable-next-line
+        TweenLite.to(
+          document.body,
+          0.4,
+          {
+            scrollTop: lineEle.offsetTop - 100,
+            ease: Power2.easeOut // eslint-disable-line
+          }
+        )
+        // eslint-disable-next-line
+        TweenLite.to(
+          document.documentElement,
+          0.4,
+          {
+            scrollTop: lineEle.offsetTop - 100,
+            ease: Power2.easeOut // eslint-disable-line
+          }
+        )
+      }
     })
   }
 
@@ -128,6 +152,7 @@ export default class PreviewPage extends React.Component {
           <link rel="stylesheet" href="/_static/markdown.css" />
           <link rel="stylesheet" href="/_static/highlight.css" />
           <link rel="stylesheet" href="/_static/katex@0.5.1.css" />
+          <script type="text/javascript" src="/_static/tweenlite.min.js"></script>
         </Head>
         <section
           className="markdown-body"
