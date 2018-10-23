@@ -46,9 +46,7 @@ const DEFAULT_OPTIONS = {
     'throwOnError': false,
     'errorColor': ' #cc0000'
   },
-  uml: {
-    useLocal: true
-  }
+  uml: {}
 }
 
 export default class PreviewPage extends React.Component {
@@ -109,8 +107,8 @@ export default class PreviewPage extends React.Component {
           ...katex
         })
         .use(mkuml, {
-          imageFormat: 'png',
-          ...((uml.useLocal || DEFAULT_OPTIONS.uml.useLocal) ? ({ server: '/_uml' }) : {})
+          ...DEFAULT_OPTIONS.uml,
+          ...uml
         })
         .use(linenumbers)
     }

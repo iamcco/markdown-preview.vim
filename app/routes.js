@@ -1,10 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const plantuml = require('node-plantuml')
-const logger = require('../lib/util/logger')('app/routes')
-
-// need java dependent
-// plantuml.useNailgun() // Activate the usage of Nailgun
+const logger = require('./lib/util/logger')('app/routes')
 
 const routes = []
 
@@ -51,24 +47,6 @@ use((req, res, next) => {
 use((req, res, next) => {
   if (/\/_static/.test(req.asPath)) {
     return fs.createReadStream(path.join('./', req.asPath)).pipe(res)
-  }
-  next()
-})
-
-// /png/:uml
-use((req, res, next) => {
-  const prefix = /^\/_uml\/png\//
-
-  if (prefix.test(req.asPath)) {
-    res.setHeader('Content-Type', 'image/png')
-
-    const uml = req.asPath.replace(prefix, '')
-
-    const decode = plantuml.decode(uml)
-    const gen = plantuml.generate({ format: 'png' })
-
-    decode.out.pipe(gen.in)
-    return gen.out.pipe(res)
   }
   next()
 })

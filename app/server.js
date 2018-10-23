@@ -1,13 +1,16 @@
+const path = require('path')
 // change cwd to ./app
-process.chdir(__dirname)
+if (!/^\/snapshot/.test(__dirname)) {
+  process.chdir(__dirname)
+} else {
+  process.chdir(process.execPath.replace(/(markdown-preview.vim.*?app).+?$/, '$1'))
+}
 // attach nvim
 const { plugin } = require('./nvim')
-const fs = require('fs')
-const path = require('path')
 const http = require('http')
 const websocket = require('socket.io')
 const opener = require('opener')
-const logger = require('../lib/util/logger')('app/server')
+const logger = require('./lib/util/logger')('app/server')
 
 const routes = require('./routes')
 

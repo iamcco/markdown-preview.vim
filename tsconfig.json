@@ -10,7 +10,7 @@
       "esnext"
     ],
     "baseUrl": ".",
-    "outDir": "./lib",
+    "outDir": "./app/lib",
     "rootDir": "./src",
     "importHelpers": true,
     "allowSyntheticDefaultImports": true
