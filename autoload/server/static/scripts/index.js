@@ -213,7 +213,7 @@
     })();
 
     marked.setOptions({
-        highlight: function (code) {
+        highlight: function (code, lang) {
             var i, len, line;
             code = code.split('\n');
             for(i = 0, len = code.length; i < len; i++) {
@@ -223,7 +223,7 @@
                 }
             }
             code = code.join('\n');
-            code =  hljs.highlightAuto(code).value;
+            if (lang != 'text') code =  hljs.highlightAuto(code).value;
             return code.replace('code' + options.flagSign + 'code', options.aPoint);
         },
         renderer: options.renderer,
