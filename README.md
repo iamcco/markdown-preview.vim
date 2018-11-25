@@ -4,15 +4,15 @@
 
 [中文](./README_cn.md)
 
-Using the markdown-preview.vim plugin you can preview markdown on real-time
-through a browser
+Using the markdown-preview.vim plugin, you can preview Markdown in real-time
+with a web browser.
 
-> this plugin needs your vim to support py2/py3 features  
-> tested on windows/ubuntu14/Mac OS X
+> This plugin needs your Vim to support Python 2 / Python 3 features.
+> Tested on Windows / Ubuntu 14 / Mac OS X.
 
-### screenshot
+### Screenshots
 
-**markdown preview**
+**Markdown preview**
 
 ![screenshot](https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif)
 
@@ -22,11 +22,11 @@ through a browser
 
 ### Installation
 
-with [vim-plug](https://github.com/junegunn/vim-plug):
+With [vim-plug](https://github.com/junegunn/vim-plug):
 
-add `Plug 'iamcco/markdown-preview.vim'` to the `vimrc` or `init.vim` file and type `:PlugInstall`
+Add `Plug 'iamcco/markdown-preview.vim'` to the `vimrc` or `init.vim` file and type `:PlugInstall`.
 
-or with MathJax support for typesetting math:
+Or with MathJax support for typesetting math:
 
 ```
 Plug 'iamcco/mathjax-support-for-mkdp'
@@ -39,58 +39,58 @@ Plug 'iamcco/markdown-preview.vim'
 
 ```
     MarkdownPreview
-    " open preview window in markdown buffer
+    " Open preview window in markdown buffer
 
     MarkdownPreviewStop
-    " close the preview window and server
+    " Close the preview window and server
 
 ```
-> when MarkdownPreview command can't open preview window, you can use the
-MarkdownPreviewStop command before using MarkdownPreview command
+> When `MarkdownPreview` command can't open the preview window, you can use the
+`MarkdownPreviewStop` command before using `MarkdownPreview` command.
 
 **Default Setting:**
 
 ```
     let g:mkdp_path_to_chrome = ""
-    " path to the chrome or the command to open chrome(or other modern browsers)
-    " if set, g:mkdp_browserfunc would be ignored
+    " Path to the chrome or the command to open chrome (or other modern browsers).
+    " If set, g:mkdp_browserfunc would be ignored.
 
     let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
-    " callback vim function to open browser, the only param is the url to open
+    " Callback Vim function to open browser, the only parameter is the url to open.
 
     let g:mkdp_auto_start = 0
-    " set to 1, the vim will open the preview window once enter the markdown
-    " buffer
+    " Set to 1, Vim will open the preview window on entering the Markdown
+    " buffer.
 
     let g:mkdp_auto_open = 0
-    " set to 1, the vim will auto open preview window when you edit the
-    " markdown file
+    " Set to 1, Vim will automatically open the preview window when you edit a
+    " Markdown file.
 
     let g:mkdp_auto_close = 1
-    " set to 1, the vim will auto close current preview window when change
-    " from markdown buffer to another buffer
+    " Set to 1, Vim will automatically close the current preview window when
+    " switching from one Markdown buffer to another.
 
     let g:mkdp_refresh_slow = 0
-    " set to 1, the vim will just refresh markdown when save the buffer or
-    " leave from insert mode, default 0 is auto refresh markdown as you edit or
-    " move the cursor
+    " Set to 1, Vim will just refresh Markdown when saving the buffer or
+    " leaving from insert mode. With default 0, it will automatically refresh
+    " Markdown as you edit or move the cursor.
 
     let g:mkdp_command_for_global = 0
-    " set to 1, the MarkdownPreview command can be use for all files,
-    " by default it just can be use in markdown file
+    " Set to 1, the MarkdownPreview command can be used for all files,
+    " by default it can only be used in Markdown files.
 
     let g:mkdp_open_to_the_world = 0
-    " set to 1, preview server available to others in your network
-    " by default, the server only listens on localhost (127.0.0.1)
+    " Set to 1, the preview server will be available to others in your network.
+    " By default, the server only listens on localhost (127.0.0.1).
 ```
 
 **Key Mapping:**
 
-By default this Plugin has no mapping, if you want to has your own mapping
-you can map the keys to `<Plug>MarkdownPreview` for opening markdown preview window and
-map keys to `<Plug>StopMarkdownPreview` for closing the preview window
+By default this plugin has no mapping: if you want to have your own mappings,
+you can map the keys to `<Plug>MarkdownPreview` for opening the Markdown preview window and
+map keys to `<Plug>StopMarkdownPreview` for closing the preview window.
 
-Examples for mapping the `F8` key to open markdown preview window and `F9` key to
+Examples for mapping the `F8` key to open Markdown preview window and `F9` key to
 close preview window:
 
 ```
@@ -100,35 +100,35 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 ```
 
-For **OS X** users you can set the `g:mkdp_path_to_chrome` as below (if you use chrome):
+For **OS X** users, you can set the `g:mkdp_path_to_chrome` as below (if you use Chrome):
 
 ```
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 " or
 let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 ```
-see issue[#1](https://github.com/iamcco/markdown-preview.vim/issues/1) for detail
+See [issue #1](https://github.com/iamcco/markdown-preview.vim/issues/1) for details.
 
 ### FAQ
 
-Q: the firefox preview window didn't close when leave the markdown file in vim
+Q: The Firefox preview window didn't close when leaving the Markdown file in Vim.
 
-A: if you want the plugin auto close the preview window on firefox, you have to do some config:
+A: If you want the plugin to auto-close the preview window in Firefox, you have to do some configuration:
 
-1. open firefox
-2. type `about:config` in the address bar and press Enter key
-3. search `dom.allow_scripts_to_close_windows` item and set the value to `true`
+1. Open Firefox.
+2. Type `about:config` in the address bar and press the `Enter` key.
+3. Search for `dom.allow_scripts_to_close_windows` and set its value to `true`.
 
-> you have to know what will happend when you do the config above
+> You have to know what will happen when you make the above changes.
 
 ### Changelog
 
-* 2017/07/16: add `g:mkdp_open_to_the_world` option
-* 2016/11/19: MathJax support with [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) plugin
-* 2016/08/28: set the title of preview page with file name
-* 2016/05/18: support key mapping and new `g:mkdp_command_for_global` option item
-* 2016/03/12: new Github like markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list
-* 2016/01/24: support display the local picture in markdown
+* 2017/07/16: Add `g:mkdp_open_to_the_world` option.
+* 2016/11/19: MathJax support with [mathjax-support-for-mkdp](https://github.com/iamcco/mathjax-support-for-mkdp) plugin.
+* 2016/08/28: Set the title of preview page with filename.
+* 2016/05/18: Support key mapping and new `g:mkdp_command_for_global` option item.
+* 2016/03/12: New Github-like Markdown styles [markdown.css](https://github.com/iamcco/markdown.css) and support task list.
+* 2016/01/24: Support to display the local picture in Markdown.
 
 ### Buy Me A Coffee ☕️
 
