@@ -10,6 +10,8 @@ with a web browser.
 > This plugin needs your Vim to support Python 2 / Python 3 features.
 > Tested on Windows / Ubuntu 14 / Mac OS X.
 
+**Note:** For neovim user you maybe whant to have look at [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) which use the RPC API of neovim
+
 ### Screenshots
 
 **Markdown preview**
