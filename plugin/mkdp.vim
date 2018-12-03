@@ -46,7 +46,7 @@ endif
 function! MKDP_browserfunc_default(url)
     " windows, including mingw
     if has('win32') || has('win64') || has('win32unix')
-        let l:cmd = "start " . a:url . '.html'
+        let l:cmd = 'cmd /c start ' . a:url . '.html'
     " mac os
     elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
         let l:cmd = 'open "' . a:url . '"'
