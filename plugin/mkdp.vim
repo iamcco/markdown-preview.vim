@@ -43,6 +43,14 @@ if !exists('g:mkdp_command_for_global')
     let g:mkdp_command_for_global = 0
 endif
 
+function s:start_cmd(cmd, timer) abort
+  if exists('*jobstart')
+    call jobstart(a:cmd)
+  elseif exists('*job_start')
+    call job_start(a:cmd)
+  endif
+endfunction
+
 function! MKDP_browserfunc_default(url)
     " windows, including mingw
     if has('win32') || has('win64') || has('win32unix')
@@ -60,10 +68,8 @@ function! MKDP_browserfunc_default(url)
     endif
 
     " Async open the url in browser
-    if exists('*jobstart')
-        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), { -> jobstart(l:cmd) })
-    elseif exists('*job_start')
-        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), { -> job_start(l:cmd) })
+    if exists('*timer_start') && (exists('*jobstart') || exists('*job_start'))
+        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), function('s:start_cmd', [l:cmd]))
     else
     " if async is not supported, use `system` command
         call system(l:cmd)
