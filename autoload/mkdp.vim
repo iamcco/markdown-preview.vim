@@ -65,7 +65,7 @@ fun! mkdp#browserClose() abort "remove the buffer number and send close message 
     endif
 endfun
 
-fun! mkdp#markdownRefresh() abort  "refresh the markdown preview
+fun! mkdp#markdownRefresh(...) abort  "refresh the markdown preview
     if has_key(g:mkdp_bufs, bufnr('%'))
         try
             call s:markdownRefresh()
@@ -146,7 +146,7 @@ fun! s:browserStart() abort "function for opening the browser
         echoerr '[Plugin: markdown-preview]: g:mkdp_path_to_chrome or g:mkdp_browserfunc not set'
     endif
     if exists('*timer_start')
-      call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), {-> mkdp#markdownRefresh()})
+      call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), function(mkdp#markdownRefresh))
     endif
 endfun
 
