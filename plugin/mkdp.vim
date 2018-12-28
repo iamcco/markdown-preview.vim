@@ -43,24 +43,32 @@ if !exists('g:mkdp_command_for_global')
     let g:mkdp_command_for_global = 0
 endif
 
-function s:start_cmd(cmd, timer) abort
+function s:start_cmd(timer) abort
   if exists('*jobstart')
-    call jobstart(a:cmd)
+    call jobstart(s:start_cmd_value)
   elseif exists('*job_start')
-    call job_start(a:cmd)
+    call job_start(s:start_cmd_value)
   endif
 endfunction
 
 function! MKDP_browserfunc_default(url)
     " windows, including mingw
     if has('win32') || has('win64') || has('win32unix')
-        let l:cmd = 'cmd /c start ' . a:url . '.html'
+        let s:start_cmd_value = 'cmd /c start ' . a:url . '.html'
     " mac os
     elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
-        let l:cmd = 'open "' . a:url . '"'
+        if has('nvim')
+              let s:start_cmd_value = 'open "' . a:url . '"'
+           else
+              let s:start_cmd_value = 'open ' . a:url . ''
+        endif
     " linux
     elseif executable('xdg-open')
-        let l:cmd = 'xdg-open "' . a:url . '"'
+       if has('nvim')
+            let s:start_cmd_value = 'xdg-open "' . a:url . '"'
+         else
+            let s:start_cmd_value = 'xdg-open ' . a:url . ''
+       endif
     " can not find the browser
     else
         echoerr "Browser not found."
@@ -69,7 +77,7 @@ function! MKDP_browserfunc_default(url)
 
     " Async open the url in browser
     if exists('*timer_start') && (exists('*jobstart') || exists('*job_start'))
-        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), function('s:start_cmd', [l:cmd]))
+        call timer_start(get(g:, 'mkdp_delay_start_browser', 200), function('s:start_cmd'))
     else
     " if async is not supported, use `system` command
         call system(l:cmd)
@@ -121,7 +129,7 @@ endfu
 function s:auto_start_server() abort
   call s:serverStart()
   if exists('*timer_start')
-    call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), {-> mkdp#markdownRefresh()})
+    call timer_start(get(g:, 'mkdp_delay_auto_refresh', 1000), function('mkdp#markdownRefresh'))
   endif
 endfunction
 
