@@ -57,10 +57,18 @@ function! MKDP_browserfunc_default(url)
         let s:start_cmd_value = 'cmd /c start ' . a:url . '.html'
     " mac os
     elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
-        let s:start_cmd_value = 'open "' . a:url . '"'
+        if has('nvim')
+              let s:start_cmd_value = 'open "' . a:url . '"'
+           else
+              let s:start_cmd_value = 'open ' . a:url . ''
+        endif
     " linux
     elseif executable('xdg-open')
-        let s:start_cmd_value = 'xdg-open ' . a:url . ''
+       if has('nvim')
+            let s:start_cmd_value = 'xdg-open "' . a:url . '"'
+         else
+            let s:start_cmd_value = 'xdg-open ' . a:url . ''
+       endif
     " can not find the browser
     else
         echoerr "Browser not found."
