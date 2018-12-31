@@ -70,7 +70,8 @@ fun! mkdp#markdownRefresh(...) abort  "refresh the markdown preview
         try
             call s:markdownRefresh()
         catch /.*/
-            call mkdp#serverStart()
+            " not need to restart server since it will occur problem
+            " call mkdp#serverStart()
         endtry
     elseif g:mkdp_auto_open
         call mkdp#browserStart()
