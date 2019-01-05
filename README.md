@@ -10,7 +10,7 @@ with a web browser.
 > This plugin needs your Vim to support Python 2 / Python 3 features.
 > Tested on Windows / Ubuntu 14 / Mac OS X.
 
-**Note:** For neovim user you maybe whant to have look at [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) which use the RPC API of neovim
+**Note:** For neovim user you may want to have look at [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) which use the RPC API of neovim
 
 ### Screenshots
 
@@ -96,10 +96,14 @@ Examples for mapping the `F8` key to open Markdown preview window and `F9` key t
 close preview window:
 
 ```
-nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
-imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
-imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+" for normal mode
+nmap <silent> <F8> <Plug>MarkdownPreview
+" for insert mode
+imap <silent> <F8> <Plug>MarkdownPreview
+" for normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+" for insert mode
+imap <silent> <F9> <Plug>StopMarkdownPreview
 ```
 
 For **OS X** users, you can set the `g:mkdp_path_to_chrome` as below (if you use Chrome):
