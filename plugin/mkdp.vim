@@ -80,7 +80,7 @@ function! MKDP_browserfunc_default(url)
         call timer_start(get(g:, 'mkdp_delay_start_browser', 200), function('s:start_cmd'))
     else
     " if async is not supported, use `system` command
-        call system(l:cmd)
+        call system(s:start_cmd_value)
     endif
 endfunction
 if !exists('g:mkdp_browserfunc')
